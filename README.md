@@ -8,8 +8,8 @@
 ## 页面结构
 
 1. **Hero** — 名字、方向、抽象自画像
-2. **About** — 在北京读书、人工智能专业、正在做的个人投资智能体
-3. **Selected Work** — 银行个人智能体（featured）+ 6 个网页 / 本地工具项目
+2. **About** — 在北京读书、人工智能专业、正在参与的 MOT 财务总助手（团队项目）
+3. **Selected Work** — MOT 财务总助手（featured，团队项目，带公开演示链接）+ 6 个网页 / 本地工具项目
 4. **More** — 数模 A 题、Suki 小程序、AI 漫画
 5. **Note** — 滚动文字宣言与喜欢的一句话
 6. **Contact** — 邮箱、GitHub、相关链接
@@ -41,7 +41,9 @@ python -m http.server 8000
 
 - 所有项目图都是从线上页面或本地项目截图后压成 WebP，统一放在 `assets/`。
 - 词声项目原来的标题含姓名缩写，已在 `cisheng` 仓库里去掉；个人页这边只保留「词声」。
-- 银行 Agent 是内部项目，没有公开链接，卡片上的「想聊这个项目」指向邮件。
+- 银行 Agent 是团队项目，卡片明确标注「团队协作 · 我是队员」，并链接到公开演示：
+  https://personal-ai-fund-manager-mot-staging.ai-banking-agent.workers.dev/app
+  具体分工以团队为准，页面没有替本人展开未确认的职责。
 - 默认跟随系统深浅色，右上角按钮可手动切换，选择会记在 localStorage。
 - 没有外部字体、CDN、统计脚本。
 

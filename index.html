@@ -692,6 +692,14 @@
     font-family: var(--mono); font-size: 9.5px; letter-spacing: .16em;
     color: var(--accent); text-transform: uppercase;
   }
+  .feature-role {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin: -4px 0 16px; padding: 4px 9px;
+    border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+    color: var(--accent);
+    font-family: var(--mono); font-size: 8.5px; letter-spacing: .12em;
+    text-transform: uppercase;
+  }
   .feature-copy h3 {
     margin: 18px 0;
     font-family: var(--serif); font-size: clamp(32px, 3.4vw, 48px);
@@ -707,19 +715,32 @@
     font-family: var(--mono); font-size: 8.5px; letter-spacing: .1em;
     text-transform: uppercase; color: var(--paper); opacity: .7;
   }
+  .feature-actions {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 20px;
+    margin-top: 28px;
+  }
   .feature-link {
     display: inline-flex; align-items: center; gap: 10px;
-    margin-top: 28px; padding-bottom: 3px;
+    padding-bottom: 3px;
     border-bottom: 1px solid color-mix(in srgb, var(--paper) 35%, transparent);
     font-size: 12px; letter-spacing: .04em;
   }
   .feature-link span { transition: transform .25s var(--ease); }
   .feature-link:hover { color: var(--accent); border-color: var(--accent); }
   .feature-link:hover span { transform: translate(2px, -2px); }
+  .feature-demo {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 10px 18px; background: var(--accent); color: #fff8ee;
+    font-size: 12px; letter-spacing: .04em;
+    transition: background .25s, transform .25s var(--ease);
+  }
+  .feature-demo span { transition: transform .25s var(--ease); }
+  .feature-demo:hover { background: #d95538; transform: translateY(-2px); }
+  .feature-demo:hover span { transform: translate(2px, -2px); }
   .feature-media {
     display: flex; align-items: center; justify-content: center;
     padding: clamp(20px, 3vw, 38px);
-    background: #e9eef7;
+    background: #e7efe9;
   }
   .feature-media-inner { width: 100%; position: relative; }
   .feature-media img {
@@ -732,7 +753,7 @@
   .feature-media-label {
     display: block; margin-top: 10px; text-align: right;
     font-family: var(--mono); font-size: 8.5px; letter-spacing: .14em;
-    color: #5f6674; text-transform: uppercase;
+    color: #4c5a52; text-transform: uppercase;
   }
 
   .project-grid {
@@ -987,7 +1008,7 @@
             <a class="btn" href="mailto:realchenchenluo@gmail.com" data-magnetic>打个招呼 <span aria-hidden="true">↗</span></a>
           </div>
           <div class="hero-facts">
-            <p class="fact"><b>Now</b><span>做一个 AI 智能体的产品文档</span></p>
+            <p class="fact"><b>Now</b><span>参与 MOT 财务总助手（团队项目）</span></p>
             <p class="fact"><b>Learning</b><span>动效、排版，以及把话说短</span></p>
             <p class="fact"><b>Playing</b><span>极限飞盘，还是新手</span></p>
           </div>
@@ -1093,10 +1114,10 @@
         </div>
         <figure class="intro-media reveal">
           <div class="intro-frame">
-            <img src="assets/bank-ui.webp" alt="个人投资智能体的界面截图" width="687" height="781" loading="lazy">
-            <span class="intro-media-tag">Building / 2026</span>
+            <img src="assets/bank-demo-portrait.webp" alt="MOT 财务总助手的公开演示界面" width="700" height="900" loading="lazy">
+            <span class="intro-media-tag">Case / 01</span>
           </div>
-          <figcaption>正在做：个人投资智能体。读懂组合，解释波动，最后停在人工确认之前。</figcaption>
+          <figcaption>团队项目：MOT 财务总助手。看懂资金情况、生成监测任务，把需要确认的事交回给人。</figcaption>
         </figure>
       </div>
 
@@ -1108,7 +1129,7 @@
             <span class="clock-zone">UTC</span>
           </div>
           <div class="now-rows">
-            <div class="now-row"><span>在做</span><b>个人投资智能体</b></div>
+            <div class="now-row"><span>在做</span><b>MOT 财务总助手（团队）</b></div>
             <div class="now-row"><span>在学</span><b>动效、排版，以及把话说短</b></div>
             <div class="now-row"><span>在玩</span><b>极限飞盘，目前还是新手</b></div>
             <div class="now-row"><span>相信</span><b>能用，比完备更重要</b></div>
@@ -1154,21 +1175,25 @@
 
       <article class="feature-card reveal">
         <div class="feature-copy">
-          <span class="feature-label">Featured / AI Agent · 2026</span>
-          <h3>银行个人智能体</h3>
+          <span class="feature-label">Featured / 银行 Agent · 团队项目</span>
+          <h3>MOT · 财务总助手</h3>
+          <span class="feature-role">团队协作 · 我是队员</span>
           <p>
-            面向个人投资场景的 AI 助手：读懂持仓、解释波动，把下一步该核对的事说清楚。
-            从产品文档、交互到前后端联调都走过一遍，所有操作停在人工确认之前。
+            面向个人与小微经营的 AI 财务助手：看懂资金情况、生成监测任务，把需要确认的动作交回给人。
+            和团队一起完成，我在其中担任队员。
           </p>
           <div class="feature-tags">
-            <span>AI Agent</span><span>产品设计</span><span>金融场景</span>
+            <span>AI Agent</span><span>金融场景</span><span>团队协作</span>
           </div>
-          <a class="feature-link" href="mailto:realchenchenluo@gmail.com?subject=想了解银行 Agent 项目">想聊这个项目 <span aria-hidden="true">↗</span></a>
+          <div class="feature-actions">
+            <a class="feature-demo" href="https://personal-ai-fund-manager-mot-staging.ai-banking-agent.workers.dev/app" target="_blank" rel="noopener">打开演示 <span aria-hidden="true">↗</span></a>
+            <a class="feature-link" href="mailto:realchenchenluo@gmail.com?subject=想了解 MOT 财务总助手项目">想聊这个项目 <span aria-hidden="true">↗</span></a>
+          </div>
         </div>
         <div class="feature-media">
           <div class="feature-media-inner">
-            <img src="assets/bank-architecture.webp" alt="银行个人智能体的主链路架构图" width="1200" height="420">
-            <span class="feature-media-label">System map / 主链路</span>
+            <img src="assets/bank-demo.webp" alt="MOT 财务总助手的公开演示界面" width="1200" height="806">
+            <span class="feature-media-label">Live demo / 公开演示</span>
           </div>
         </div>
       </article>
