@@ -1,0 +1,66 @@
+# 个人主页
+
+单文件静态个人主页，零依赖、零构建。`index.html` 里包含全部 HTML / CSS / JS，直接双击就能打开。
+
+## 本地预览
+
+```bash
+cd personal-site
+python -m http.server 8000
+```
+
+然后打开 http://localhost:8000/ 。
+
+直接双击 `index.html` 也可以；用本地服务器是为了更接近线上环境。
+
+## 改哪里
+
+全是静态文本，直接在 `index.html` 里搜索替换即可：
+
+| 内容 | 搜索关键词 |
+| --- | --- |
+| 姓名、英文名 | 罗晨晨 / CHENCHEN LUO / CHENCHEN |
+| 学校与自我介绍 | 北京语言大学 |
+| 邮箱（页面里有 3 处） | `realchenchenluo@gmail.com` |
+| 首页三行近况 | `Now` / `Learning` / `Playing` |
+| 作品列表 | `01 / Selected Work` 下面的六个 `<a class="work-row">` |
+| 关于、此刻、工具箱 | `card-about` / `card-now` / `card-tools` |
+
+几点说明：
+
+- 作品链接目前指向 GitHub Pages 上的线上地址，改成自己的即可。
+- 头像是内联 SVG 的抽象画，不是照片；想换真人照片，可把 `<figure class="portrait">` 里的 `<svg>` 换成 `<img>`。
+- 默认跟随系统深浅色，右上角按钮可手动切换，选择会记在 localStorage。
+- 页面没有外部字体、CDN、统计脚本，断网也能完整显示。
+
+## 部署到 GitHub Pages
+
+仓库根目录需要是 `index.html`。首次部署：
+
+```bash
+cd personal-site
+git init -b main
+git add -A
+git commit -m "personal homepage"
+gh repo create realchenchenluo/<repo> --public --source=. --push
+gh api -X POST repos/realchenchenluo/<repo>/pages \
+  -f "source[branch]=main" -f "source[path]=/"
+gh api repos/realchenchenluo/<repo>/pages/builds/latest --jq .status
+```
+
+等状态变成 `built`（约 20–30 秒），访问：
+
+```
+https://realchenchenluo.github.io/<repo>/
+```
+
+免费版 GitHub Pages 要求仓库公开。`.nojekyll` 已经放好，用来跳过 Jekyll 处理。
+
+## 文件
+
+```
+personal-site/
+├── index.html   # 全部内容
+├── .nojekyll    # GitHub Pages 跳过 Jekyll
+└── README.md
+```
