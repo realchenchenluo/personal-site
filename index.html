@@ -109,7 +109,10 @@
     background: color-mix(in srgb, var(--paper) 84%, transparent);
     -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
+    transition: transform .3s cubic-bezier(.45, 0, .55, 1), box-shadow .3s ease;
   }
+  .site-head.is-hidden { transform: translateY(-100%); }
+  .site-head.is-scrolled { box-shadow: 0 12px 24px -20px rgba(23, 22, 15, .45); }
   .head-inner {
     width: min(1240px, calc(100% - 96px)); margin-inline: auto;
     display: flex; align-items: center; justify-content: space-between; gap: 24px;
@@ -141,6 +144,12 @@
   }
   .head-nav a:hover { color: var(--ink); }
   .head-nav a:hover::after { transform: scaleX(1); transform-origin: left; }
+  .head-nav a.is-active { color: var(--accent); }
+  .head-nav a.is-active::after {
+    background: var(--accent);
+    transform: scaleX(1); transform-origin: left;
+    transition: transform .25s cubic-bezier(.33, 1, .68, 1);
+  }
 
   .theme-btn {
     width: 36px; height: 36px; padding: 0;
@@ -216,13 +225,16 @@
     opacity: 0; animation: fade 1s ease 1.25s forwards;
   }
   .btn {
+    --mx: 0px; --my: 0px;
     display: inline-flex; align-items: center; gap: 14px;
     padding: 13px 22px; border: 1px solid var(--line-strong); border-radius: 2px;
     font-size: 13px; letter-spacing: .06em;
-    transition: background .25s, color .25s, border-color .25s, transform .25s var(--ease);
+    transform: translate(var(--mx), var(--my));
+    will-change: transform;
+    transition: background .25s, color .25s, border-color .25s;
   }
   .btn span { transition: transform .25s var(--ease); }
-  .btn:hover { transform: translateY(-2px); border-color: var(--ink); }
+  .btn:hover { border-color: var(--ink); }
   .btn:hover span { transform: translate(2px, -2px); }
   .btn-solid { background: var(--ink); color: var(--paper); border-color: var(--ink); }
   .btn-solid:hover { background: var(--accent); border-color: var(--accent); color: #fff8ee; }
@@ -245,14 +257,23 @@
     position: relative; justify-self: end; width: 100%; max-width: 400px;
     opacity: 0; animation: fade 1.2s ease .5s forwards;
   }
+  .portrait-stage { width: 100%; perspective: 900px; }
   .portrait {
     position: relative; margin: 0;
     border: 1px solid var(--line-strong);
     background: var(--paper-2);
-    transition: transform .6s var(--ease);
+    transform-style: preserve-3d;
+    will-change: transform;
   }
-  .portrait:hover { transform: rotate(-.8deg) translateY(-4px); }
+  .portrait-art { position: relative; overflow: hidden; }
   .portrait svg { width: 100%; height: auto; }
+  .portrait-glare {
+    position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(130px circle at var(--gx, 50%) var(--gy, 50%), rgba(255, 255, 255, .42), rgba(255, 255, 255, 0) 70%);
+    transition: opacity .4s cubic-bezier(.16, 1, .3, 1);
+  }
+  .portrait.is-tilting .portrait-glare { opacity: 1; }
   .portrait-caption {
     display: flex; justify-content: space-between; gap: 12px;
     padding: 10px 12px; border-top: 1px solid var(--line-strong);
@@ -283,6 +304,33 @@
     font-family: var(--serif); font-weight: 700; font-size: 21vw; line-height: 1;
     letter-spacing: -.06em; color: var(--ink); opacity: .035;
     pointer-events: none; user-select: none;
+  }
+
+  /* ---------- scroll cue ---------- */
+  .scroll-cue {
+    display: flex; align-items: center; justify-content: center; gap: 14px;
+    margin: 32px auto 0; color: var(--soft);
+  }
+  .cue-word {
+    font-family: var(--mono); font-size: 10px; letter-spacing: .3em;
+    text-transform: uppercase;
+  }
+  .cue-mouse {
+    position: relative; width: 22px; height: 34px;
+    border: 1.5px solid var(--ink); border-radius: 12px;
+  }
+  .cue-mouse i {
+    position: absolute; left: 50%; top: 7px;
+    width: 4px; height: 8px; margin-left: -2px; border-radius: 2px;
+    background: var(--accent);
+    animation: cue-drop 1.57s infinite;
+  }
+  @keyframes cue-drop {
+    0% { transform: translateY(0); opacity: 1; }
+    45% { opacity: 1; }
+    70% { transform: translateY(14px); opacity: 0; }
+    76% { transform: translateY(0); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
   }
 
   /* ---------- ticker ---------- */
@@ -467,6 +515,35 @@
     letter-spacing: .1em; color: var(--accent); padding-top: 5px;
   }
 
+  /* ---------- statement ---------- */
+  .statement {
+    padding: 108px 0;
+    border-top: 1px solid var(--line);
+    background: var(--paper-2);
+  }
+  .statement .wrap {
+    display: grid; grid-template-columns: 150px minmax(0, 1fr);
+    gap: 24px; align-items: start;
+  }
+  .statement-kicker {
+    margin: 0; padding-top: 14px;
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .18em;
+    color: var(--accent); text-transform: uppercase;
+  }
+  .statement-text {
+    margin: 0; max-width: 12em;
+    font-family: var(--serif); font-weight: 700;
+    font-size: clamp(38px, 5.6vw, 74px); line-height: 1.16; letter-spacing: -.035em;
+  }
+  .statement-text .line { display: block; }
+  .statement-text .line.accent { color: var(--accent); }
+  .statement-text .ch { opacity: .16; }
+  .statement-sign {
+    margin: 32px 0 0;
+    font-family: var(--mono); font-size: 10px; letter-spacing: .16em;
+    color: var(--soft); text-transform: uppercase;
+  }
+
   /* ---------- contact ---------- */
   .contact {
     margin-top: 40px;
@@ -505,10 +582,14 @@
   }
   .email:hover::after { transform: scaleX(0); }
   .copy-btn {
+    --mx: 0px; --my: 0px;
     padding: 9px 16px; border: 1px solid color-mix(in srgb, currentColor 30%, transparent);
     background: transparent; color: var(--paper); cursor: pointer;
     font-family: var(--mono); font-size: 10px; letter-spacing: .1em;
-    text-transform: uppercase; transition: background .25s, color .25s, border-color .25s;
+    text-transform: uppercase;
+    transform: translate(var(--mx), var(--my));
+    will-change: transform;
+    transition: background .25s, color .25s, border-color .25s;
   }
   .copy-btn:hover { background: var(--paper); color: var(--ink); border-color: var(--paper); }
   .contact-links { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 34px; }
@@ -529,6 +610,26 @@
     position: absolute; right: -1vw; bottom: -5vw; z-index: 0;
     font-family: var(--serif); font-weight: 700; font-size: 24vw; line-height: 1;
     opacity: .05; pointer-events: none; user-select: none;
+  }
+
+  /* ---------- cursor follower ---------- */
+  .cursor {
+    position: fixed; top: 0; left: 0; z-index: 950;
+    width: 34px; height: 34px; margin: -17px 0 0 -17px;
+    border: 1px solid var(--accent); border-radius: 50%;
+    pointer-events: none; opacity: 0; will-change: transform;
+    transition: width .25s var(--ease), height .25s var(--ease),
+                margin .25s var(--ease), background .25s, opacity .3s;
+  }
+  .cursor::after {
+    content: ""; position: absolute; left: 50%; top: 50%;
+    width: 4px; height: 4px; margin: -2px 0 0 -2px;
+    border-radius: 50%; background: var(--accent);
+  }
+  .cursor.on { opacity: .88; }
+  .cursor.grow {
+    width: 52px; height: 52px; margin: -26px 0 0 -26px;
+    background: var(--accent-soft);
   }
 
   /* ---------- toast ---------- */
@@ -575,6 +676,10 @@
     .stamp { top: -36px; right: -22px; width: 92px; height: 92px; }
     .hero-watermark { font-size: 34vw; bottom: 0; }
     .section { padding: 82px 0; }
+    .statement { padding: 82px 0; }
+    .statement .wrap { grid-template-columns: 1fr; gap: 18px; }
+    .statement-kicker { padding-top: 0; }
+    .statement-text { max-width: 14em; }
     .section-head { grid-template-columns: 1fr; gap: 12px; margin-bottom: 38px; }
     .section-index { padding-bottom: 0; }
     .section-note { text-align: left; padding-bottom: 0; }
@@ -619,6 +724,9 @@
     .reveal { opacity: 1; transform: none; }
     .hero-title .line > span { transform: none; }
     .hero-en, .hero-intro, .hero-actions, .hero-facts, .hero-figure { opacity: 1; }
+    .cursor, .scroll-cue { display: none; }
+    .statement-text .ch { opacity: 1 !important; }
+    .portrait { transform: none !important; }
   }
 </style>
 </head>
@@ -667,8 +775,8 @@
             做成别人点开就能用的网页。这里放着我最近做完的小东西——都不大，但都能跑。
           </p>
           <div class="hero-actions">
-            <a class="btn btn-solid" href="#work">看看作品 <span aria-hidden="true">↓</span></a>
-            <a class="btn" href="mailto:realchenchenluo@gmail.com">打个招呼 <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-solid" href="#work" data-magnetic>看看作品 <span aria-hidden="true">↓</span></a>
+            <a class="btn" href="mailto:realchenchenluo@gmail.com" data-magnetic>打个招呼 <span aria-hidden="true">↗</span></a>
           </div>
           <div class="hero-facts">
             <p class="fact"><b>Now</b><span>做银行 AI 智能体的产品文档</span></p>
@@ -687,39 +795,48 @@
             </svg>
             <span class="stamp-star">✳</span>
           </div>
-          <figure class="portrait">
-            <svg viewBox="0 0 400 500" role="img" aria-label="抽象自画像：朱红圆日与深色山形">
-              <defs>
-                <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
-                  <path d="M50 0H0V50" fill="none" stroke="currentColor" stroke-width=".6" opacity=".18"/>
-                </pattern>
-                <clipPath id="frame"><rect width="400" height="500"/></clipPath>
-              </defs>
-              <g clip-path="url(#frame)">
-                <rect width="400" height="500" fill="var(--paper-2)"/>
-                <rect width="400" height="500" fill="url(#grid)"/>
-                <circle cx="258" cy="186" r="112" fill="var(--accent)"/>
-                <circle cx="258" cy="186" r="152" fill="none" stroke="currentColor" stroke-width="1" opacity=".42"/>
-                <path d="M-20 372 Q 120 300 220 352 T 420 330 L420 520 L-20 520 Z" fill="currentColor" opacity=".9"/>
-                <path d="M-20 412 Q 100 356 230 400 T 420 376" fill="none" stroke="var(--paper-2)" stroke-width="1.5" opacity=".5"/>
-                <line x1="92" y1="0" x2="92" y2="500" stroke="currentColor" stroke-width="1" opacity=".22"/>
-                <line x1="0" y1="122" x2="400" y2="122" stroke="currentColor" stroke-width="1" opacity=".22"/>
-                <path d="M92 122h16M92 122v16M308 122h-16M308 122v16" stroke="currentColor" stroke-width="1" opacity=".55"/>
-                <text x="34" y="52" font-family="monospace" font-size="10" letter-spacing="2" fill="currentColor" opacity=".6">FIG. 01</text>
-                <text x="34" y="70" font-family="monospace" font-size="8" letter-spacing="1.6" fill="currentColor" opacity=".4">A PERSON, ABSTRACTED</text>
-                <text x="34" y="316" font-family="monospace" font-size="8" letter-spacing="1.6" fill="currentColor" opacity=".55">39.99 N · 116.31 E</text>
-                <text x="366" y="316" font-family="monospace" font-size="8" letter-spacing="1.6" fill="currentColor" opacity=".55" text-anchor="end">BEIJING</text>
-              </g>
-            </svg>
-            <figcaption class="portrait-caption">
-              <span>Portrait / 抽象自画像</span>
-              <span>No photo, on purpose</span>
-            </figcaption>
-          </figure>
+          <div class="portrait-stage">
+            <figure class="portrait">
+              <div class="portrait-art">
+                <svg viewBox="0 0 400 500" role="img" aria-label="抽象自画像：朱红圆日与深色山形">
+                  <defs>
+                    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+                      <path d="M50 0H0V50" fill="none" stroke="currentColor" stroke-width=".6" opacity=".18"/>
+                    </pattern>
+                    <clipPath id="frame"><rect width="400" height="500"/></clipPath>
+                  </defs>
+                  <g clip-path="url(#frame)">
+                    <rect width="400" height="500" fill="var(--paper-2)"/>
+                    <rect width="400" height="500" fill="url(#grid)"/>
+                    <circle cx="258" cy="186" r="112" fill="var(--accent)"/>
+                    <circle cx="258" cy="186" r="152" fill="none" stroke="currentColor" stroke-width="1" opacity=".42"/>
+                    <path d="M-20 372 Q 120 300 220 352 T 420 330 L420 520 L-20 520 Z" fill="currentColor" opacity=".9"/>
+                    <path d="M-20 412 Q 100 356 230 400 T 420 376" fill="none" stroke="var(--paper-2)" stroke-width="1.5" opacity=".5"/>
+                    <line x1="92" y1="0" x2="92" y2="500" stroke="currentColor" stroke-width="1" opacity=".22"/>
+                    <line x1="0" y1="122" x2="400" y2="122" stroke="currentColor" stroke-width="1" opacity=".22"/>
+                    <path d="M92 122h16M92 122v16M308 122h-16M308 122v16" stroke="currentColor" stroke-width="1" opacity=".55"/>
+                    <text x="34" y="52" font-family="monospace" font-size="10" letter-spacing="2" fill="currentColor" opacity=".6">FIG. 01</text>
+                    <text x="34" y="70" font-family="monospace" font-size="8" letter-spacing="1.6" fill="currentColor" opacity=".4">A PERSON, ABSTRACTED</text>
+                    <text x="34" y="316" font-family="monospace" font-size="8" letter-spacing="1.6" fill="currentColor" opacity=".55">39.99 N · 116.31 E</text>
+                    <text x="366" y="316" font-family="monospace" font-size="8" letter-spacing="1.6" fill="currentColor" opacity=".55" text-anchor="end">BEIJING</text>
+                  </g>
+                </svg>
+                <span class="portrait-glare" aria-hidden="true"></span>
+              </div>
+              <figcaption class="portrait-caption">
+                <span>Portrait / 抽象自画像</span>
+                <span>No photo, on purpose</span>
+              </figcaption>
+            </figure>
+          </div>
           <p class="figure-note">FIG. 01 — ONE OF MANY VERSIONS</p>
         </div>
       </div>
       <div class="hero-watermark" aria-hidden="true">LUO</div>
+    </div>
+    <div class="scroll-cue" aria-hidden="true">
+      <span class="cue-word">Scroll</span>
+      <span class="cue-mouse"><i></i></span>
     </div>
   </section>
 
@@ -798,6 +915,20 @@
           <span class="w-tags"><span>Canvas</span><span>动效</span><span>2026</span></span>
           <span class="w-arrow" aria-hidden="true">↗</span>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="statement" aria-labelledby="statement-title">
+    <div class="wrap">
+      <p class="statement-kicker">A Note / 写给自己</p>
+      <div>
+        <p class="statement-text" id="statement-title" data-scroll-reveal aria-label="把想法做成能跑的东西，再让它好看。">
+          <span class="line">把想法做成</span>
+          <span class="line">能跑的东西，</span>
+          <span class="line accent">再让它好看。</span>
+        </p>
+        <p class="statement-sign">写给自己 · 2026 · 还在改</p>
       </div>
     </div>
   </section>
@@ -882,12 +1013,13 @@
       </p>
       <div class="contact-actions reveal">
         <a class="email" href="mailto:realchenchenluo@gmail.com">realchenchenluo@gmail.com</a>
-        <button class="copy-btn" id="copyEmail" type="button">复制邮箱</button>
+        <button class="copy-btn" id="copyEmail" type="button" data-magnetic>复制邮箱</button>
       </div>
       <div class="contact-links reveal">
         <a href="https://github.com/realchenchenluo" target="_blank" rel="noopener">GitHub ↗</a>
         <a href="https://realchenchenluo.github.io/concept-fable/" target="_blank" rel="noopener">Concept Fable ↗</a>
         <a href="https://realchenchenluo.github.io/heart-code/" target="_blank" rel="noopener">Heart Code ↗</a>
+        <a href="https://showheyohtaki.github.io/motion-prompt/" target="_blank" rel="noopener">Motion Prompt ↗</a>
       </div>
       <div class="contact-foot">
         <span>© <span id="year">2026</span> 罗晨晨</span>
@@ -899,6 +1031,7 @@
   </section>
 </main>
 
+<div class="cursor" id="cursor" aria-hidden="true"></div>
 <div class="toast" id="toast" role="status" aria-live="polite">邮箱已复制</div>
 
 <script>
@@ -955,6 +1088,263 @@
     items.forEach(function (el) { io.observe(el); });
   } else {
     items.forEach(function (el) { el.classList.add("in"); });
+  }
+
+  /* ---- shared motion helpers ---- */
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  function clamp01(v) { return Math.min(1, Math.max(0, v)); }
+
+  /* ---- hide-on-scroll header + scrollspy (#149 / #150) ---- */
+  var head = document.querySelector(".site-head");
+  var navLinks = [].slice.call(document.querySelectorAll('.head-nav a[href^="#"]'));
+  var spySections = navLinks.map(function (link) {
+    var target = document.querySelector(link.getAttribute("href"));
+    return target ? { link: link, el: target } : null;
+  }).filter(Boolean);
+  var lastY = window.scrollY;
+  var suppressHideUntil = 0;
+
+  navLinks.forEach(function (link) {
+    link.addEventListener("click", function () {
+      suppressHideUntil = performance.now() + 1000;
+      head.classList.remove("is-hidden");
+    });
+  });
+
+  function updateHeader() {
+    var y = window.scrollY;
+    head.classList.toggle("is-scrolled", y > 30);
+    if (reduceMotion) {
+      head.classList.remove("is-hidden");
+      lastY = y;
+      return;
+    }
+    if (performance.now() < suppressHideUntil) {
+      head.classList.remove("is-hidden");
+      lastY = y;
+      return;
+    }
+    if (y < 34) head.classList.remove("is-hidden");
+    else if (y > lastY + 4) head.classList.add("is-hidden");
+    else if (y < lastY - 4) head.classList.remove("is-hidden");
+    lastY = y;
+  }
+
+  function updateSpy() {
+    var line = window.scrollY + window.innerHeight * 0.35;
+    var current = null;
+    spySections.forEach(function (s) {
+      if (s.el.getBoundingClientRect().top + window.scrollY <= line) current = s;
+    });
+    if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4) {
+      current = spySections[spySections.length - 1];
+    }
+    spySections.forEach(function (s) {
+      var on = s === current;
+      s.link.classList.toggle("is-active", on);
+      if (on) s.link.setAttribute("aria-current", "location");
+      else s.link.removeAttribute("aria-current");
+    });
+  }
+
+  /* ---- scroll text reveal (#146) ---- */
+  var statement = document.querySelector("[data-scroll-reveal]");
+  var statementChars = [];
+  if (statement) {
+    [].forEach.call(statement.querySelectorAll(".line"), function (line) {
+      var text = line.textContent;
+      line.textContent = "";
+      Array.from(text).forEach(function (ch) {
+        var span = document.createElement("span");
+        span.className = "ch";
+        span.textContent = ch;
+        line.appendChild(span);
+        statementChars.push(span);
+      });
+    });
+  }
+
+  function updateStatement() {
+    if (!statement || !statementChars.length || reduceMotion) return;
+    var top = statement.getBoundingClientRect().top;
+    var h = window.innerHeight;
+    var p = clamp01((h * 0.88 - top) / (h * 0.66));
+    var total = statementChars.length;
+    statementChars.forEach(function (span, i) {
+      var f = clamp01(p * (total + 2) - i);
+      span.style.opacity = (0.16 + 0.84 * f).toFixed(3);
+    });
+  }
+  if (reduceMotion) {
+    statementChars.forEach(function (span) { span.style.opacity = "1"; });
+  }
+
+  var uiTick = false;
+  function updateScrollUI() {
+    updateHeader();
+    updateSpy();
+    updateStatement();
+  }
+  window.addEventListener("scroll", function () {
+    if (!uiTick) {
+      uiTick = true;
+      requestAnimationFrame(function () { updateScrollUI(); uiTick = false; });
+    }
+  }, { passive: true });
+  window.addEventListener("resize", updateScrollUI);
+  updateScrollUI();
+
+  /* ---- cursor follower (#083) ---- */
+  if (finePointer && !reduceMotion) {
+    var cursor = document.getElementById("cursor");
+    var px = -100, py = -100, fx = -100, fy = -100;
+    var shown = false, cursorRaf = null, cursorLast = 0;
+
+    function cursorLoop(now) {
+      var dt = Math.min(48, now - (cursorLast || now));
+      cursorLast = now;
+      var k = 1 - Math.pow(1 - 0.12, dt / 16.67);
+      fx += (px - fx) * k;
+      fy += (py - fy) * k;
+      cursor.style.transform = "translate3d(" + fx.toFixed(2) + "px," + fy.toFixed(2) + "px,0)";
+      if (Math.abs(px - fx) > 0.1 || Math.abs(py - fy) > 0.1) {
+        cursorRaf = requestAnimationFrame(cursorLoop);
+      } else {
+        cursorRaf = null;
+        cursorLast = 0;
+      }
+    }
+
+    document.addEventListener("pointermove", function (e) {
+      px = e.clientX; py = e.clientY;
+      if (!shown) {
+        shown = true; fx = px; fy = py;
+        cursor.classList.add("on");
+      }
+      if (!cursorRaf) cursorRaf = requestAnimationFrame(cursorLoop);
+    }, { passive: true });
+
+    document.addEventListener("pointerover", function (e) {
+      if (e.target.closest && e.target.closest("a, button, .work-row")) cursor.classList.add("grow");
+    });
+    document.addEventListener("pointerout", function (e) {
+      var to = e.relatedTarget;
+      if (!to || !(to.closest && to.closest("a, button, .work-row"))) cursor.classList.remove("grow");
+    });
+    document.documentElement.addEventListener("mouseleave", function () {
+      cursor.classList.remove("on");
+    });
+    document.documentElement.addEventListener("mouseenter", function () {
+      if (shown) cursor.classList.add("on");
+    });
+  }
+
+  /* ---- magnetic buttons (#084) ---- */
+  if (finePointer && !reduceMotion) {
+    var magnetics = [].slice.call(document.querySelectorAll("[data-magnetic]")).map(function (el) {
+      return { el: el, x: 0, y: 0, inside: false, returning: false, leaveX: 0, leaveY: 0, leaveAt: 0 };
+    });
+    var mx = -9999, my = -9999, magRaf = null, magLast = 0;
+
+    function magneticLoop(now) {
+      var dt = Math.min(48, now - (magLast || now));
+      magLast = now;
+      var k = 1 - Math.pow(1 - 0.18, dt / 16.67);
+      var alive = false;
+
+      magnetics.forEach(function (m) {
+        var r = m.el.getBoundingClientRect();
+        var cx = r.left + r.width / 2 - m.x;
+        var cy = r.top + r.height / 2 - m.y;
+        var dx = mx - cx, dy = my - cy;
+
+        if (Math.hypot(dx, dy) < 110) {
+          m.inside = true;
+          m.returning = false;
+          m.x += (dx * 0.35 - m.x) * k;
+          m.y += (dy * 0.35 - m.y) * k;
+        } else if (m.inside) {
+          m.inside = false;
+          m.returning = true;
+          m.leaveX = m.x;
+          m.leaveY = m.y;
+          m.leaveAt = now;
+        } else if (m.returning) {
+          var p = Math.min(1, (now - m.leaveAt) / 1100);
+          var e = Math.pow(2, -10 * p) * Math.sin((p - 0.075) * 2 * Math.PI / 0.3) + 1;
+          m.x = m.leaveX * (1 - e);
+          m.y = m.leaveY * (1 - e);
+          if (p >= 1) { m.returning = false; m.x = 0; m.y = 0; }
+        }
+
+        m.el.style.setProperty("--mx", m.x.toFixed(2) + "px");
+        m.el.style.setProperty("--my", m.y.toFixed(2) + "px");
+        if (m.inside || m.returning || Math.abs(m.x) > 0.05 || Math.abs(m.y) > 0.05) alive = true;
+      });
+
+      if (alive) {
+        magRaf = requestAnimationFrame(magneticLoop);
+      } else {
+        magRaf = null;
+        magLast = 0;
+      }
+    }
+
+    window.addEventListener("pointermove", function (e) {
+      mx = e.clientX; my = e.clientY;
+      if (!magRaf) { magLast = 0; magRaf = requestAnimationFrame(magneticLoop); }
+    }, { passive: true });
+
+    document.documentElement.addEventListener("mouseleave", function () {
+      mx = -9999; my = -9999;
+      if (!magRaf) { magLast = 0; magRaf = requestAnimationFrame(magneticLoop); }
+    });
+  }
+
+  /* ---- 3D tilt on the portrait (#153) ---- */
+  if (finePointer && !reduceMotion) {
+    var stage = document.querySelector(".portrait-stage");
+    var portrait = stage ? stage.querySelector(".portrait") : null;
+    if (stage && portrait) {
+      var rx = 0, ry = 0, targetRx = 0, targetRy = 0;
+      var tiltRaf = null, tiltLast = 0, tiltActive = false;
+
+      function tiltLoop(now) {
+        var dt = Math.min(48, now - (tiltLast || now));
+        tiltLast = now;
+        var k = 1 - Math.pow(1 - 0.12, dt / 16.67);
+        rx += (targetRx - rx) * k;
+        ry += (targetRy - ry) * k;
+        portrait.style.transform = "rotateX(" + rx.toFixed(4) + "rad) rotateY(" + ry.toFixed(4) + "rad)";
+        if (Math.abs(targetRx - rx) > 0.0005 || Math.abs(targetRy - ry) > 0.0005 || tiltActive) {
+          tiltRaf = requestAnimationFrame(tiltLoop);
+        } else {
+          tiltRaf = null;
+          tiltLast = 0;
+          portrait.style.transform = "";
+        }
+      }
+
+      stage.addEventListener("pointermove", function (e) {
+        var r = stage.getBoundingClientRect();
+        var nx = Math.max(-1, Math.min(1, ((e.clientX - r.left) / r.width - 0.5) * 2));
+        var ny = Math.max(-1, Math.min(1, ((e.clientY - r.top) / r.height - 0.5) * 2));
+        targetRx = ny * 0.32;
+        targetRy = nx * 0.32;
+        portrait.classList.add("is-tilting");
+        portrait.style.setProperty("--gx", ((nx + 1) / 2 * 100).toFixed(1) + "%");
+        portrait.style.setProperty("--gy", ((ny + 1) / 2 * 100).toFixed(1) + "%");
+        tiltActive = true;
+        if (!tiltRaf) { tiltLast = 0; tiltRaf = requestAnimationFrame(tiltLoop); }
+      });
+
+      stage.addEventListener("pointerleave", function () {
+        targetRx = 0; targetRy = 0; tiltActive = false;
+        portrait.classList.remove("is-tilting");
+        if (!tiltRaf) { tiltLast = 0; tiltRaf = requestAnimationFrame(tiltLoop); }
+      });
+    }
   }
 
   /* ---- copy email ---- */
