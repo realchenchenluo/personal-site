@@ -1,9 +1,18 @@
 # 个人主页
 
-单文件静态个人主页，零依赖、零构建。`index.html` 里包含全部 HTML / CSS / JS，直接双击就能打开。
+静态个人主页，零依赖、零构建。页面在 `index.html`，项目截图在 `assets/`。
 
 - 线上地址：https://realchenchenluo.github.io/personal-site/
 - 仓库：https://github.com/realchenchenluo/personal-site
+
+## 页面结构
+
+1. **Hero** — 名字、方向、抽象自画像
+2. **About** — 在北京读书、人工智能专业、正在做的个人投资智能体
+3. **Selected Work** — 银行个人智能体（featured）+ 6 个网页 / 本地工具项目
+4. **More** — 数模 A 题、Suki 小程序、AI 漫画
+5. **Note** — 滚动文字宣言与喜欢的一句话
+6. **Contact** — 邮箱、GitHub、相关链接
 
 ## 本地预览
 
@@ -18,23 +27,23 @@ python -m http.server 8000
 
 ## 改哪里
 
-全是静态文本，直接在 `index.html` 里搜索替换即可：
-
-| 内容 | 搜索关键词 |
+| 内容 | 位置 / 关键词 |
 | --- | --- |
-| 姓名 | Chen Chen / CHEN CHEN |
-| 自我介绍 | `hero-intro` / `card-about` |
+| 姓名 | `Chen Chen` / `CHEN CHEN` |
+| 自我介绍 | `intro-lead`、`hero-intro` |
 | 邮箱（页面里有 3 处） | `realchenchenluo@gmail.com` |
-| 首页三行近况 | `Now` / `Learning` / `Playing` |
-| 作品列表 | `01 / Selected Work` 下面的六个 `<a class="work-row">` |
-| 关于、此刻、工具箱 | `card-about` / `card-now` / `card-tools` |
+| 作品 | `id="work"` 下的 `feature-card` 与 `project-grid` |
+| 实验项目 | `id="experiments"` 下的 `experiments-grid` |
+| 项目截图 | `assets/*.webp`，替换时保持文件名即可 |
+| 此刻、工具箱、原则 | `about-bento` 里的三张卡片 |
 
 几点说明：
 
-- 作品链接目前指向 GitHub Pages 上的线上地址，改成自己的即可。
-- 头像是内联 SVG 的抽象画，不是照片；想换真人照片，可把 `<figure class="portrait">` 里的 `<svg>` 换成 `<img>`。
+- 所有项目图都是从线上页面或本地项目截图后压成 WebP，统一放在 `assets/`。
+- 词声项目原来的标题含姓名缩写，已在 `cisheng` 仓库里去掉；个人页这边只保留「词声」。
+- 银行 Agent 是内部项目，没有公开链接，卡片上的「想聊这个项目」指向邮件。
 - 默认跟随系统深浅色，右上角按钮可手动切换，选择会记在 localStorage。
-- 页面没有外部字体、CDN、统计脚本，断网也能完整显示。
+- 没有外部字体、CDN、统计脚本。
 
 ## 动效
 
@@ -42,7 +51,7 @@ python -m http.server 8000
 
 | 编号 | 效果 | 用在哪 |
 | --- | --- | --- |
-| #083 | 光标跟随 | 全站，朱红圆环跟随指针（跟随系数调至 0.3，比原参数更跟手） |
+| #083 | 光标跟随 | 全站，朱红圆环跟随指针（跟随系数 0.3，比原参数更跟手） |
 | #084 | 磁吸按钮 | 首屏两个按钮、复制邮箱按钮 |
 | #146 | 滚动文字显现 | 「把想法做成能跑的东西」整段 |
 | #149 | 滚动隐藏页头 | 向下滚动收起，向上滚动出现 |
@@ -54,7 +63,7 @@ python -m http.server 8000
 
 ## 更新线上版本
 
-已经部署在 GitHub Pages。改完 `index.html` 后：
+已经部署在 GitHub Pages。改完文件后：
 
 ```bash
 git add -A
@@ -89,7 +98,8 @@ https://realchenchenluo.github.io/<repo>/
 
 ```
 personal-site/
-├── index.html   # 全部内容
-├── .nojekyll    # GitHub Pages 跳过 Jekyll
+├── index.html      # 页面结构、样式与脚本
+├── assets/         # 项目截图与封面（WebP）
+├── .nojekyll       # GitHub Pages 跳过 Jekyll
 └── README.md
 ```

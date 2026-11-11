@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Chen Chen · 把想法做成能跑的东西</title>
-<meta name="description" content="Chen Chen 的个人主页：写代码，也写文档。这里放着六件已经上线的小东西。">
+<meta name="description" content="Chen Chen 的个人主页：在北京学人工智能，写代码，也做点小东西。">
 <meta name="author" content="Chen Chen">
 <meta property="og:title" content="Chen Chen · 把想法做成能跑的东西">
-<meta property="og:description" content="六件已经上线的小东西，以及一个还在折腾的人。">
+<meta property="og:description" content="在北京学人工智能，做 AI 智能体、网页和一些小实验。">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2317160f'/%3E%3Ccircle cx='32' cy='32' r='15' fill='%23c4472d'/%3E%3C/svg%3E">
   <script>
@@ -80,7 +80,7 @@
   .mono { font-family: var(--mono); }
   .accent { color: var(--accent); }
   .section-title { text-wrap: balance; }
-  .hero-intro, .card-about p, .w-desc, .contact-sub { text-wrap: pretty; }
+  .hero-intro, .intro-copy p, .project-body p, .experiment-body p, .contact-sub { text-wrap: pretty; }
 
   .skip {
     position: fixed; top: 12px; left: 12px; z-index: 1000;
@@ -370,53 +370,6 @@
     text-align: right; padding-bottom: 8px;
   }
 
-  /* ---------- work ---------- */
-  .work-list { border-bottom: 1px solid var(--line-strong); }
-  .work-row {
-    position: relative;
-    display: grid;
-    grid-template-columns: 52px minmax(0, 1fr) minmax(0, 1.25fr) 186px 34px;
-    gap: 24px; align-items: center;
-    padding: 28px 20px; margin: 0 -20px;
-    border-top: 1px solid var(--line-strong);
-    transition: background .35s var(--ease), color .35s var(--ease), padding .35s var(--ease);
-  }
-  .work-row:hover { background: var(--ink); color: var(--paper); padding-left: 28px; }
-  .w-index {
-    font-family: var(--mono); font-size: 10px; letter-spacing: .1em; color: var(--accent);
-  }
-  .w-title {
-    display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px;
-    font-family: var(--serif); font-size: clamp(24px, 2.4vw, 32px);
-    font-weight: 700; line-height: 1.2; letter-spacing: -.02em;
-  }
-  .w-title em {
-    font-family: var(--mono); font-style: normal; font-size: 9.5px;
-    font-weight: 400; letter-spacing: .16em; color: var(--soft);
-    text-transform: uppercase; transition: color .35s;
-  }
-  .work-row:hover .w-title em { color: var(--paper); opacity: .55; }
-  .w-desc { font-size: 13px; line-height: 1.8; color: var(--soft); transition: color .35s; }
-  .work-row:hover .w-desc { color: var(--paper); opacity: .82; }
-  .w-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-  .w-tags span {
-    padding: 3px 8px; border: 1px solid var(--line);
-    font-family: var(--mono); font-size: 9px; letter-spacing: .1em;
-    color: var(--soft); text-transform: uppercase;
-    transition: border-color .35s, color .35s;
-  }
-  .work-row:hover .w-tags span { border-color: color-mix(in srgb, currentColor 35%, transparent); color: var(--paper); opacity: .8; }
-  .w-arrow {
-    width: 32px; height: 32px; display: grid; place-items: center;
-    border: 1px solid var(--line); border-radius: 50%;
-    font-size: 14px; color: var(--soft);
-    transition: transform .35s var(--ease), border-color .35s, color .35s;
-  }
-  .work-row:hover .w-arrow {
-    transform: translate(4px, -4px);
-    border-color: var(--paper); color: var(--paper);
-  }
-
   /* ---------- about ---------- */
   .bento {
     display: grid; grid-template-columns: repeat(12, 1fr);
@@ -435,7 +388,6 @@
     opacity: 0; transition: opacity .4s;
   }
   .card:hover::before { opacity: 1; }
-  .card-about { grid-column: span 7; }
   .card-now { grid-column: span 5; }
   .card-tools { grid-column: span 5; }
   .card-principles { grid-column: span 7; }
@@ -443,11 +395,6 @@
     display: inline-block; margin-bottom: 26px;
     font-family: var(--mono); font-size: 9.5px; letter-spacing: .18em;
     color: var(--accent); text-transform: uppercase;
-  }
-  .card-about p { position: relative; margin: 0 0 16px; font-size: 15px; line-height: 1.95; color: var(--soft); max-width: 48em; }
-  .card-about .lead {
-    font-family: var(--serif); font-size: clamp(22px, 2.2vw, 28px);
-    font-weight: 600; line-height: 1.55; color: var(--ink); letter-spacing: -.01em;
   }
   .stats {
     display: grid; grid-template-columns: repeat(3, 1fr);
@@ -669,11 +616,247 @@
   }
   @keyframes marquee { to { transform: translateX(-50%); } }
 
+  /* ---------- intro / about ---------- */
+  .intro-grid {
+    display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr);
+    gap: clamp(32px, 5vw, 72px); align-items: center;
+  }
+  .intro-copy p {
+    margin: 0 0 16px; max-width: 40em;
+    font-size: 15px; line-height: 1.95; color: var(--soft);
+  }
+  .intro-copy .intro-lead {
+    margin: 0 0 24px;
+    font-family: var(--serif); font-weight: 600;
+    font-size: clamp(23px, 2.4vw, 32px); line-height: 1.5;
+    letter-spacing: -.02em; color: var(--ink);
+    max-width: 18em;
+  }
+  .intro-facts {
+    display: flex; flex-wrap: wrap; gap: 18px 42px;
+    margin-top: 30px; padding-top: 22px;
+    border-top: 1px solid var(--line);
+  }
+  .intro-facts span {
+    display: block; margin-bottom: 5px;
+    font-family: var(--mono); font-size: 9px; letter-spacing: .16em;
+    color: var(--accent); text-transform: uppercase;
+  }
+  .intro-facts b { font-weight: 500; font-size: 14px; }
+  .intro-media { margin: 0; }
+  .intro-frame {
+    position: relative; padding: 12px;
+    border: 1px solid var(--line-strong);
+    background: var(--paper-2);
+    transition: transform .5s var(--ease);
+  }
+  .intro-frame:hover { transform: rotate(-.6deg) translateY(-3px); }
+  .intro-frame img { width: 100%; height: auto; display: block; }
+  .intro-media-tag {
+    position: absolute; top: 24px; right: 24px; left: auto;
+    padding: 5px 9px; background: var(--ink); color: var(--paper);
+    font-family: var(--mono); font-size: 8.5px; letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+  .intro-media figcaption {
+    margin-top: 12px; font-size: 12px; line-height: 1.7; color: var(--soft);
+    max-width: 34em;
+  }
+  .about-bento {
+    grid-template-columns: 5fr 7fr;
+    margin-top: 46px;
+  }
+  .about-bento .card { grid-column: auto; }
+  .about-bento .card-principles { grid-column: 1 / -1; }
+  .about-bento .principles {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+  }
+  .about-bento .principles li {
+    display: block; border-bottom: 0; border-top: 1px solid var(--line);
+    padding: 16px 0 0;
+  }
+  .about-bento .principles i { display: block; margin-bottom: 8px; padding-top: 0; }
+
+  /* ---------- work gallery ---------- */
+  .feature-card {
+    display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+    background: var(--ink); color: var(--paper);
+    border: 1px solid var(--ink);
+    margin-bottom: 24px; overflow: hidden;
+  }
+  .feature-copy {
+    padding: clamp(30px, 4vw, 54px);
+    display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+  }
+  .feature-label {
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: .16em;
+    color: var(--accent); text-transform: uppercase;
+  }
+  .feature-copy h3 {
+    margin: 18px 0;
+    font-family: var(--serif); font-size: clamp(32px, 3.4vw, 48px);
+    font-weight: 700; line-height: 1.12; letter-spacing: -.03em;
+  }
+  .feature-copy p {
+    margin: 0; max-width: 40em;
+    font-size: 13.5px; line-height: 1.9; color: var(--paper); opacity: .64;
+  }
+  .feature-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 24px; }
+  .feature-tags span {
+    padding: 4px 9px; border: 1px solid color-mix(in srgb, var(--paper) 24%, transparent);
+    font-family: var(--mono); font-size: 8.5px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--paper); opacity: .7;
+  }
+  .feature-link {
+    display: inline-flex; align-items: center; gap: 10px;
+    margin-top: 28px; padding-bottom: 3px;
+    border-bottom: 1px solid color-mix(in srgb, var(--paper) 35%, transparent);
+    font-size: 12px; letter-spacing: .04em;
+  }
+  .feature-link span { transition: transform .25s var(--ease); }
+  .feature-link:hover { color: var(--accent); border-color: var(--accent); }
+  .feature-link:hover span { transform: translate(2px, -2px); }
+  .feature-media {
+    display: flex; align-items: center; justify-content: center;
+    padding: clamp(20px, 3vw, 38px);
+    background: #e9eef7;
+  }
+  .feature-media-inner { width: 100%; position: relative; }
+  .feature-media img {
+    width: 100%; height: auto; display: block;
+    background: #fff; border: 1px solid rgba(23, 22, 15, .12);
+    box-shadow: 0 24px 44px -28px rgba(23, 22, 15, .5);
+    transition: transform .5s var(--ease);
+  }
+  .feature-card:hover .feature-media img { transform: translateY(-4px) scale(1.015); }
+  .feature-media-label {
+    display: block; margin-top: 10px; text-align: right;
+    font-family: var(--mono); font-size: 8.5px; letter-spacing: .14em;
+    color: #5f6674; text-transform: uppercase;
+  }
+
+  .project-grid {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px;
+  }
+  .project-card {
+    position: relative; display: flex; flex-direction: column;
+    border: 1px solid var(--line); background: var(--card);
+    transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s;
+  }
+  .project-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--line-strong);
+    box-shadow: 0 26px 48px -32px rgba(23, 22, 15, .5);
+  }
+  .project-media {
+    margin: 0; aspect-ratio: 16 / 10; overflow: hidden;
+    background: var(--paper-2); border-bottom: 1px solid var(--line);
+  }
+  .project-media img {
+    width: 100%; height: 100%; object-fit: cover; object-position: top center;
+    transition: transform .65s var(--ease);
+  }
+  .project-card:hover .project-media img { transform: scale(1.045); }
+  .project-body {
+    position: relative; padding: 22px 24px 24px;
+    display: flex; flex-direction: column; gap: 9px; flex: 1;
+  }
+  .project-top {
+    display: flex; justify-content: space-between; gap: 12px;
+    font-family: var(--mono); font-size: 8.5px; letter-spacing: .12em;
+    color: var(--soft); text-transform: uppercase;
+  }
+  .project-top span:first-child { color: var(--accent); }
+  .project-body h3 {
+    margin: 2px 0 0; font-family: var(--serif); font-size: 26px;
+    font-weight: 700; line-height: 1.2; letter-spacing: -.02em;
+  }
+  .project-body p { margin: 0; font-size: 13px; line-height: 1.8; color: var(--soft); max-width: 38em; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .project-tags span {
+    padding: 3px 8px; border: 1px solid var(--line);
+    font-family: var(--mono); font-size: 8.5px; letter-spacing: .08em;
+    color: var(--soft); text-transform: uppercase;
+  }
+  .project-go {
+    position: absolute; top: 14px; right: 14px; z-index: 2;
+    width: 34px; height: 34px; display: grid; place-items: center;
+    border-radius: 50%; background: var(--paper); border: 1px solid var(--line-strong);
+    font-size: 13px; color: var(--ink);
+    opacity: 0; transform: translateY(-4px);
+    transition: opacity .3s, transform .3s var(--ease);
+  }
+  .project-card:hover .project-go { opacity: 1; transform: none; }
+  .project-card.no-link { cursor: default; }
+  .project-card.no-link .project-go { display: none; }
+  .project-card.no-link:hover { transform: none; box-shadow: none; }
+  .project-card.no-link:hover .project-media img { transform: none; }
+
+  /* ---------- experiments ---------- */
+  .experiments-grid {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px;
+  }
+  .experiment-card {
+    display: flex; flex-direction: column; overflow: hidden;
+    border: 1px solid var(--line); background: var(--card);
+    transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+  }
+  .experiment-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 22px 40px -30px rgba(23, 22, 15, .45);
+  }
+  .experiment-media {
+    margin: 0; aspect-ratio: 4 / 3; overflow: hidden;
+    background: var(--paper-2); border-bottom: 1px solid var(--line);
+  }
+  .experiment-media img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform .6s var(--ease);
+  }
+  .experiment-card:hover .experiment-media img { transform: scale(1.035); }
+  .experiment-body { padding: 20px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .experiment-top {
+    display: flex; justify-content: space-between; gap: 10px;
+    font-family: var(--mono); font-size: 8px; letter-spacing: .12em;
+    color: var(--soft); text-transform: uppercase;
+  }
+  .experiment-top span:first-child { color: var(--accent); }
+  .experiment-body h3 {
+    margin: 0; font-family: var(--serif); font-size: 22px;
+    font-weight: 700; line-height: 1.25; letter-spacing: -.02em;
+  }
+  .experiment-body p { margin: 0; font-size: 12.5px; line-height: 1.75; color: var(--soft); }
+  .exp-text { background: var(--ink); color: var(--paper); }
+  .exp-text .experiment-body p { color: var(--paper); opacity: .6; }
+  .exp-text .project-tags span { color: var(--paper); border-color: color-mix(in srgb, var(--paper) 22%, transparent); }
+  .exp-cover {
+    aspect-ratio: 4 / 3; padding: 24px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    border-bottom: 1px solid color-mix(in srgb, var(--paper) 16%, transparent);
+    background:
+      radial-gradient(120% 90% at 85% 10%, rgba(226, 106, 74, .22), transparent 55%),
+      var(--ink);
+  }
+  .exp-cover-kicker {
+    font-family: var(--mono); font-size: 8.5px; letter-spacing: .16em;
+    color: var(--accent); text-transform: uppercase;
+  }
+  .exp-symbol {
+    font-family: var(--mono); font-size: 46px; line-height: 1;
+    color: var(--paper); opacity: .2;
+  }
+  .exp-cover h3 {
+    margin: 0 0 6px; font-family: var(--serif); font-size: 26px;
+    font-weight: 700; letter-spacing: -.02em;
+  }
+  .exp-cover-sub {
+    font-family: var(--mono); font-size: 8.5px; letter-spacing: .12em;
+    color: var(--paper); opacity: .45; text-transform: uppercase;
+  }
+
   /* ---------- responsive ---------- */
   @media (max-width: 1080px) {
     .section-head { grid-template-columns: 132px minmax(0, 1fr) 240px; }
-    .work-row { grid-template-columns: 42px minmax(0, 1fr) minmax(0, 1.1fr) 34px; }
-    .w-tags { display: none; }
   }
   @media (max-width: 860px) {
     .wrap, .head-inner { width: calc(100% - 48px); }
@@ -691,17 +874,6 @@
     .section-head { grid-template-columns: 1fr; gap: 12px; margin-bottom: 38px; }
     .section-index { padding-bottom: 0; }
     .section-note { text-align: left; padding-bottom: 0; }
-    .card-about, .card-now, .card-tools, .card-principles { grid-column: span 12; }
-    .work-row {
-      grid-template-columns: 32px minmax(0, 1fr) 28px;
-      grid-template-areas: "i t a" "i d d" "i g g";
-      gap: 10px 14px; padding: 24px 10px; margin: 0 -10px;
-    }
-    .w-index { grid-area: i; align-self: start; padding-top: 8px; }
-    .w-title { grid-area: t; font-size: 25px; }
-    .w-desc { grid-area: d; }
-    .w-tags { grid-area: g; display: flex; }
-    .w-arrow { grid-area: a; align-self: start; }
   }
   @media (max-width: 560px) {
     .wrap, .head-inner { width: calc(100% - 36px); }
@@ -718,6 +890,37 @@
     .stat b { font-size: 28px; }
     .contact { padding: 88px 0 40px; }
     .contact-foot { margin-top: 70px; }
+  }
+
+  @media (max-width: 900px) {
+    .intro-grid { grid-template-columns: 1fr; }
+    .intro-media { max-width: 440px; }
+    .feature-card { grid-template-columns: 1fr; }
+    .feature-media { padding: 22px; }
+    .about-bento { grid-template-columns: 1fr; }
+    .about-bento .card-principles { grid-column: auto; }
+    .about-bento .principles { grid-template-columns: 1fr; gap: 0; }
+    .about-bento .principles li {
+      padding: 14px 0;
+      border-top: 0; border-bottom: 1px solid var(--line);
+    }
+    .about-bento .principles li:last-child { border-bottom: 0; }
+  }
+  @media (max-width: 860px) {
+    .experiments-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 700px) {
+    .project-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .intro-lead { font-size: 22px; }
+    .intro-facts { gap: 14px 26px; }
+    .feature-copy { padding: 26px; }
+    .feature-copy h3 { font-size: 30px; }
+    .feature-media { padding: 14px; }
+    .project-body { padding: 18px; }
+    .project-body h3 { font-size: 23px; }
+    .experiment-body { padding: 18px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -747,8 +950,8 @@
       <span class="brand-en">CHEN CHEN</span>
     </a>
     <nav class="head-nav" aria-label="主导航">
-      <a href="#work">作品</a>
       <a href="#about">关于</a>
+      <a href="#work">作品</a>
       <a href="#contact">联系</a>
       <button class="theme-btn" id="themeBtn" type="button" aria-label="切换深浅配色">
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
@@ -776,8 +979,8 @@
           </h1>
           <p class="hero-en">Small things, made well.</p>
           <p class="hero-intro">
-            我是<strong>Chen Chen</strong>，写代码，也写需求文档；喜欢把一句模糊的念头，
-            做成别人点开就能用的网页。这里放着我最近做完的小东西——都不大，但都能跑。
+            我是<strong>Chen Chen</strong>，在北京读书，专业是人工智能。写代码，也写需求文档；
+            喜欢把一句模糊的念头，做成别人点开就能用的网页。
           </p>
           <div class="hero-actions">
             <a class="btn btn-solid" href="#work" data-magnetic>看看作品 <span aria-hidden="true">↓</span></a>
@@ -864,62 +1067,240 @@
     </div>
   </div>
 
+  <section class="section" id="about" aria-labelledby="about-title">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-index">01 / About</span>
+        <h2 class="section-title" id="about-title">在北京读书，学人工智能</h2>
+        <p class="section-note">一半时间写代码，<br>一半时间把想法做出来。</p>
+      </div>
+
+      <div class="intro-grid">
+        <div class="intro-copy reveal">
+          <p class="intro-lead">我是 Chen Chen，<br>本科在读，专业是人工智能。</p>
+          <p>
+            平时写代码，也写产品文档。喜欢把一个模糊的念头，做成别人点开就能用的东西——网页、小程序，
+            或者一个能陪人聊两句的 Agent。
+          </p>
+          <p>
+            我的项目都不大，但大多真的上线了。比起「做完」，我更在意「有没有人用」。
+          </p>
+          <div class="intro-facts">
+            <div><span>Base</span><b>北京</b></div>
+            <div><span>Major</span><b>人工智能</b></div>
+            <div><span>Now</span><b>AI 智能体 · 网页</b></div>
+          </div>
+        </div>
+        <figure class="intro-media reveal">
+          <div class="intro-frame">
+            <img src="assets/bank-ui.webp" alt="个人投资智能体的界面截图" width="687" height="781" loading="lazy">
+            <span class="intro-media-tag">Building / 2026</span>
+          </div>
+          <figcaption>正在做：个人投资智能体。读懂组合，解释波动，最后停在人工确认之前。</figcaption>
+        </figure>
+      </div>
+
+      <div class="bento about-bento">
+        <article class="card card-now reveal">
+          <span class="card-label">Now / 此刻</span>
+          <div class="clock-row">
+            <span class="clock" id="clock">--:--:--</span>
+            <span class="clock-zone">UTC</span>
+          </div>
+          <div class="now-rows">
+            <div class="now-row"><span>在做</span><b>个人投资智能体</b></div>
+            <div class="now-row"><span>在学</span><b>动效、排版，以及把话说短</b></div>
+            <div class="now-row"><span>在玩</span><b>极限飞盘，目前还是新手</b></div>
+            <div class="now-row"><span>相信</span><b>能用，比完备更重要</b></div>
+          </div>
+        </article>
+
+        <article class="card card-tools reveal">
+          <span class="card-label">Toolbox / 顺手的东西</span>
+          <div class="chips">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>JavaScript</span>
+            <span>Python</span>
+            <span>Flask</span>
+            <span>SQLite</span>
+            <span>微信小程序</span>
+            <span>产品文档</span>
+            <span>AI 工具链</span>
+            <span>一点排版</span>
+          </div>
+          <p class="toolbox-note">还有一堆用到一半就放弃的，不列了。</p>
+        </article>
+
+        <article class="card card-principles reveal">
+          <span class="card-label">Principles / 三条</span>
+          <ol class="principles">
+            <li><i>01</i><span>先做出来，再做好看。拖着的完美主义不算完美主义。</span></li>
+            <li><i>02</i><span>能用，比完备更重要。剩下的功能留给下一版。</span></li>
+            <li><i>03</i><span>不重复造轮子，但愿意把轮子拆开看看里面是什么。</span></li>
+          </ol>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <section class="section" id="work" aria-labelledby="work-title">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="section-index">01 / Selected Work</span>
-        <h2 class="section-title" id="work-title">六件小东西</h2>
-        <p class="section-note">都上线了，点开就能玩。<br>没有一件是为了交作业做的。</p>
+        <span class="section-index">02 / Selected Work</span>
+        <h2 class="section-title" id="work-title">做过的东西</h2>
+        <p class="section-note">能点开的都上线了。<br>没链接的，是内部项目或还在长的。</p>
       </div>
 
-      <div class="work-list">
-        <a class="work-row reveal" href="https://realchenchenluo.github.io/cisheng/" target="_blank" rel="noopener">
-          <span class="w-index">01</span>
-          <span class="w-title">词声 <em>Cisheng</em></span>
-          <span class="w-desc">拍下课本，收进生词；按音节和读音规则，自动生成一份专属的英语语音默写。</span>
-          <span class="w-tags"><span>网页</span><span>语音</span><span>2026</span></span>
-          <span class="w-arrow" aria-hidden="true">↗</span>
+      <article class="feature-card reveal">
+        <div class="feature-copy">
+          <span class="feature-label">Featured / AI Agent · 2026</span>
+          <h3>银行个人智能体</h3>
+          <p>
+            面向个人投资场景的 AI 助手：读懂持仓、解释波动，把下一步该核对的事说清楚。
+            从产品文档、交互到前后端联调都走过一遍，所有操作停在人工确认之前。
+          </p>
+          <div class="feature-tags">
+            <span>AI Agent</span><span>产品设计</span><span>金融场景</span>
+          </div>
+          <a class="feature-link" href="mailto:realchenchenluo@gmail.com?subject=想了解银行 Agent 项目">想聊这个项目 <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="feature-media">
+          <div class="feature-media-inner">
+            <img src="assets/bank-architecture.webp" alt="银行个人智能体的主链路架构图" width="1200" height="420">
+            <span class="feature-media-label">System map / 主链路</span>
+          </div>
+        </div>
+      </article>
+
+      <div class="project-grid">
+        <a class="project-card reveal" href="https://realchenchenluo.github.io/cisheng/" target="_blank" rel="noopener">
+          <figure class="project-media">
+            <img src="assets/cisheng.webp" alt="词声的语音默写首页" width="1200" height="750" loading="lazy">
+          </figure>
+          <div class="project-body">
+            <div class="project-top"><span>01</span><span>Web · 2026</span></div>
+            <h3>词声</h3>
+            <p>拍照收词，按音节和读音规则，生成一份专属的英语语音默写。</p>
+            <div class="project-tags"><span>网页</span><span>语音</span></div>
+            <span class="project-go" aria-hidden="true">↗</span>
+          </div>
         </a>
 
-        <a class="work-row reveal" href="https://realchenchenluo.github.io/concept-fable/" target="_blank" rel="noopener">
-          <span class="w-index">02</span>
-          <span class="w-title">概念寓言机 <em>Concept Fable</em></span>
-          <span class="w-desc">每次打开都长出一则新寓言。故事中途停三次，让你猜它到底在讲哪个概念，最后自己命名。</span>
-          <span class="w-tags"><span>生成叙事</span><span>单文件</span><span>2026</span></span>
-          <span class="w-arrow" aria-hidden="true">↗</span>
+        <a class="project-card reveal" href="https://realchenchenluo.github.io/concept-fable/" target="_blank" rel="noopener">
+          <figure class="project-media">
+            <img src="assets/concept-fable.webp" alt="概念寓言机的故事首页" width="1200" height="750" loading="lazy">
+          </figure>
+          <div class="project-body">
+            <div class="project-top"><span>02</span><span>Web · 2026</span></div>
+            <h3>概念寓言机</h3>
+            <p>每次打开生成一则新寓言。中途停三次，让你猜它到底在讲哪个概念。</p>
+            <div class="project-tags"><span>生成叙事</span><span>单文件</span></div>
+            <span class="project-go" aria-hidden="true">↗</span>
+          </div>
         </a>
 
-        <a class="work-row reveal" href="https://realchenchenluo.github.io/frisbee-radar/" target="_blank" rel="noopener">
-          <span class="w-index">03</span>
-          <span class="w-title">飞盘雷达 <em>Frisbee Radar</em></span>
-          <span class="w-desc">把公众号、小红书、抖音上的飞盘训练和赛事讯息收进一个页面，按时间顺着读。</span>
-          <span class="w-tags"><span>采集</span><span>聚合</span><span>2026</span></span>
-          <span class="w-arrow" aria-hidden="true">↗</span>
+        <a class="project-card reveal" href="https://realchenchenluo.github.io/frisbee-radar/" target="_blank" rel="noopener">
+          <figure class="project-media">
+            <img src="assets/frisbee.webp" alt="飞盘讯息聚合页面" width="1200" height="750" loading="lazy">
+          </figure>
+          <div class="project-body">
+            <div class="project-top"><span>03</span><span>Web · 2026</span></div>
+            <h3>飞盘雷达</h3>
+            <p>把公众号、小红书、抖音上的飞盘训练和赛事讯息收进一个页面。</p>
+            <div class="project-tags"><span>采集</span><span>聚合</span></div>
+            <span class="project-go" aria-hidden="true">↗</span>
+          </div>
         </a>
 
-        <a class="work-row reveal" href="https://realchenchenluo.github.io/chishenme/" target="_blank" rel="noopener">
-          <span class="w-index">04</span>
-          <span class="w-title">今天吃什么 <em>Chishenme</em></span>
-          <span class="w-desc">价格、等待时间、好吃度三项加权，随机解决大学生的两顿饭。食堂和外卖都能抽。</span>
-          <span class="w-tags"><span>前端</span><span>决策器</span><span>2026</span></span>
-          <span class="w-arrow" aria-hidden="true">↗</span>
+        <a class="project-card reveal" href="https://realchenchenluo.github.io/chishenme/" target="_blank" rel="noopener">
+          <figure class="project-media">
+            <img src="assets/chishenme.webp" alt="今天吃什么抽签界面" width="1200" height="750" loading="lazy">
+          </figure>
+          <div class="project-body">
+            <div class="project-top"><span>04</span><span>Web · 2026</span></div>
+            <h3>今天吃什么</h3>
+            <p>价格、等待时间、好吃度三项加权，随机解决两顿饭的选择困难。</p>
+            <div class="project-tags"><span>前端</span><span>决策器</span></div>
+            <span class="project-go" aria-hidden="true">↗</span>
+          </div>
         </a>
 
-        <a class="work-row reveal" href="https://realchenchenluo.github.io/weather/" target="_blank" rel="noopener">
-          <span class="w-index">05</span>
-          <span class="w-title">今天穿什么 <em>Wearcast</em></span>
-          <span class="w-desc">不只报温度，直接告诉你出门该穿哪一件。把天气翻译成穿衣建议。</span>
-          <span class="w-tags"><span>天气</span><span>生活</span><span>2026</span></span>
-          <span class="w-arrow" aria-hidden="true">↗</span>
+        <a class="project-card reveal" href="https://realchenchenluo.github.io/weather/" target="_blank" rel="noopener">
+          <figure class="project-media">
+            <img src="assets/wearcast.webp" alt="Wearcast 今天穿什么页面" width="1200" height="750" loading="lazy">
+          </figure>
+          <div class="project-body">
+            <div class="project-top"><span>05</span><span>Web · 2026</span></div>
+            <h3>今天穿什么</h3>
+            <p>不只报温度，直接告诉出门该穿哪一件。把天气翻译成穿衣建议。</p>
+            <div class="project-tags"><span>天气</span><span>生活</span></div>
+            <span class="project-go" aria-hidden="true">↗</span>
+          </div>
         </a>
 
-        <a class="work-row reveal" href="https://realchenchenluo.github.io/heart-code/" target="_blank" rel="noopener">
-          <span class="w-index">06</span>
-          <span class="w-title">爱心代码 <em>Heart Code</em></span>
-          <span class="w-desc">两种告白方式：近百个 Windows 弹窗拼出的爱心，和三千颗粒子构成的真心。</span>
-          <span class="w-tags"><span>Canvas</span><span>动效</span><span>2026</span></span>
-          <span class="w-arrow" aria-hidden="true">↗</span>
-        </a>
+        <article class="project-card no-link reveal">
+          <figure class="project-media">
+            <img src="assets/token.webp" alt="Token 用量看板的数据面板" width="1200" height="750" loading="lazy">
+          </figure>
+          <div class="project-body">
+            <div class="project-top"><span>06</span><span>Local tool · 2026</span></div>
+            <h3>Token 看板</h3>
+            <p>统计模型调用、Token 用量和缓存命中率，纯本地运行，只读自己的数据。</p>
+            <div class="project-tags"><span>Flask</span><span>数据</span><span>本地</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="experiments" aria-labelledby="experiments-title">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-index">03 / More</span>
+        <h2 class="section-title" id="experiments-title">边角料与实验</h2>
+        <p class="section-note">没做成大众产品的、偏实验的，<br>也值得留个位置。</p>
+      </div>
+
+      <div class="experiments-grid">
+        <article class="experiment-card reveal">
+          <figure class="experiment-media">
+            <img src="assets/math-modeling.webp" alt="药材烘干模型的温度与水分浓度曲线" width="1200" height="900" loading="lazy">
+          </figure>
+          <div class="experiment-body">
+            <div class="experiment-top"><span>Modeling · 2026</span><span>Case</span></div>
+            <h3>药材烘干模型</h3>
+            <p>数模竞赛 A 题：建立热湿耦合模型，算出降温、降水分的完整烘干策略。</p>
+            <div class="project-tags"><span>建模</span><span>Python</span><span>论文</span></div>
+          </div>
+        </article>
+
+        <article class="experiment-card reveal">
+          <figure class="experiment-media">
+            <img src="assets/suki.webp" alt="Suki 游戏助手的应用图标" width="1200" height="900" loading="lazy">
+          </figure>
+          <div class="experiment-body">
+            <div class="experiment-top"><span>Mini Program · 2026</span><span>In progress</span></div>
+            <h3>Suki 游戏助手</h3>
+            <p>一个成语与猜字小游戏合集，做成微信小程序；题库和界面还在继续磨。</p>
+            <div class="project-tags"><span>微信小程序</span><span>游戏</span></div>
+          </div>
+        </article>
+
+        <article class="experiment-card exp-text reveal">
+          <div class="exp-cover">
+            <span class="exp-cover-kicker">AI Comic / 2026</span>
+            <span class="exp-symbol" aria-hidden="true">{ }</span>
+            <div>
+              <h3>最后一行代码</h3>
+              <span class="exp-cover-sub">7 panels · voice-over</span>
+            </div>
+          </div>
+          <div class="experiment-body">
+            <p>七格漫画加一段配音：一个关于 bug、凌晨三点和承认错误的故事。</p>
+            <div class="project-tags"><span>生成</span><span>分镜</span><span>视频</span></div>
+          </div>
+        </article>
       </div>
     </div>
   </section>
@@ -939,78 +1320,9 @@
     </div>
   </section>
 
-  <section class="section" id="about" aria-labelledby="about-title">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="section-index">02 / About</span>
-        <h2 class="section-title" id="about-title">关于我，以及此刻</h2>
-        <p class="section-note">一个还在折腾的人。<br>喜欢把东西做完，而不只是开始。</p>
-      </div>
-
-      <div class="bento">
-        <article class="card card-about reveal">
-          <span class="card-label">About / 01</span>
-          <p class="lead">我不太相信「等准备好了再做」。</p>
-          <p>
-            大部分东西都是边做边会的：先有一个粗糙的版本，再一点点把它磨到自己愿意拿给别人看。
-            写网页是这样，写文档、做比赛、玩飞盘也是这样。
-          </p>
-          <p>
-            白天写代码和需求文档，晚上做点奇怪的小工具——它们大多没什么用，但都挺好玩。
-          </p>
-          <div class="stats">
-            <div class="stat"><b>06</b><span>上线的小项目</span></div>
-            <div class="stat"><b>12+</b><span>公开的仓库</span></div>
-            <div class="stat"><b>∞</b><span>还没做完的想法</span></div>
-          </div>
-        </article>
-
-        <article class="card card-now reveal">
-          <span class="card-label">Now / 此刻</span>
-          <div class="clock-row">
-            <span class="clock" id="clock">--:--:--</span>
-            <span class="clock-zone">UTC</span>
-          </div>
-          <div class="now-rows">
-            <div class="now-row"><span>在做</span><b>一个 AI 智能体的产品文档</b></div>
-            <div class="now-row"><span>在学</span><b>动效、排版，以及把话说短</b></div>
-            <div class="now-row"><span>在玩</span><b>极限飞盘，目前还是新手</b></div>
-            <div class="now-row"><span>相信</span><b>能用，比完备更重要</b></div>
-          </div>
-        </article>
-
-        <article class="card card-tools reveal">
-          <span class="card-label">Toolbox / 顺手的东西</span>
-          <div class="chips">
-            <span>HTML</span>
-            <span>CSS</span>
-            <span>JavaScript</span>
-            <span>Python</span>
-            <span>Flask</span>
-            <span>SQLite</span>
-            <span>微信小程序</span>
-            <span>需求文档</span>
-            <span>AI 工具链</span>
-            <span>一点排版</span>
-          </div>
-          <p class="toolbox-note">还有一堆用到一半就放弃的，不列了。</p>
-        </article>
-
-        <article class="card card-principles reveal">
-          <span class="card-label">Principles / 三条</span>
-          <ol class="principles">
-            <li><i>01</i><span>先做出来，再做好看。拖着的完美主义不算完美主义。</span></li>
-            <li><i>02</i><span>能用，比完备更重要。剩下的功能留给下一版。</span></li>
-            <li><i>03</i><span>不重复造轮子，但愿意把轮子拆开看看里面是什么。</span></li>
-          </ol>
-        </article>
-      </div>
-    </div>
-  </section>
-
   <section class="contact" id="contact" aria-labelledby="contact-title">
     <div class="wrap">
-      <span class="contact-kicker reveal">03 / Contact</span>
+      <span class="contact-kicker reveal">04 / Contact</span>
       <h2 id="contact-title" class="reveal">有个想法<span class="accent">？</span><br>聊聊。</h2>
       <p class="contact-sub reveal">
         不管是一个还没成形的点子、一个做不完的网页，还是飞盘局缺人，
@@ -1023,7 +1335,6 @@
       <div class="contact-links reveal">
         <a href="https://github.com/realchenchenluo" target="_blank" rel="noopener">GitHub ↗</a>
         <a href="https://realchenchenluo.github.io/concept-fable/" target="_blank" rel="noopener">Concept Fable ↗</a>
-        <a href="https://realchenchenluo.github.io/heart-code/" target="_blank" rel="noopener">Heart Code ↗</a>
         <a href="https://showheyohtaki.github.io/motion-prompt/" target="_blank" rel="noopener">Motion Prompt ↗</a>
       </div>
       <div class="contact-foot">
@@ -1231,11 +1542,11 @@
     }, { passive: true });
 
     document.addEventListener("pointerover", function (e) {
-      if (e.target.closest && e.target.closest("a, button, .work-row")) cursor.classList.add("grow");
+      if (e.target.closest && e.target.closest("a, button, .project-card")) cursor.classList.add("grow");
     });
     document.addEventListener("pointerout", function (e) {
       var to = e.relatedTarget;
-      if (!to || !(to.closest && to.closest("a, button, .work-row"))) cursor.classList.remove("grow");
+      if (!to || !(to.closest && to.closest("a, button, .project-card"))) cursor.classList.remove("grow");
     });
     document.documentElement.addEventListener("mouseleave", function () {
       cursor.classList.remove("on");
