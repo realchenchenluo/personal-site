@@ -1126,7 +1126,7 @@
           <span class="card-label">Now / 此刻</span>
           <div class="clock-row">
             <span class="clock" id="clock">--:--:--</span>
-            <span class="clock-zone">UTC</span>
+            <span class="clock-zone">UTC+8</span>
           </div>
           <div class="now-rows">
             <div class="now-row"><span>在做</span><b>MOT 财务总助手（团队）</b></div>
@@ -1388,10 +1388,10 @@
     try { localStorage.setItem("theme", next); } catch (e) {}
   });
 
-  /* ---- clock (UTC) ---- */
+  /* ---- clock (Beijing / UTC+8) ---- */
   var clock = document.getElementById("clock");
   var timeFmt = new Intl.DateTimeFormat("zh-CN", {
-    timeZone: "UTC", hour12: false,
+    timeZone: "Asia/Shanghai", hour12: false,
     hour: "2-digit", minute: "2-digit", second: "2-digit"
   });
   function tick() { clock.textContent = timeFmt.format(new Date()); }
