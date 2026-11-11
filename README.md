@@ -2,6 +2,9 @@
 
 单文件静态个人主页，零依赖、零构建。`index.html` 里包含全部 HTML / CSS / JS，直接双击就能打开。
 
+- 线上地址：https://realchenchenluo.github.io/personal-site/
+- 仓库：https://github.com/realchenchenluo/personal-site
+
 ## 本地预览
 
 ```bash
@@ -33,9 +36,19 @@ python -m http.server 8000
 - 默认跟随系统深浅色，右上角按钮可手动切换，选择会记在 localStorage。
 - 页面没有外部字体、CDN、统计脚本，断网也能完整显示。
 
-## 部署到 GitHub Pages
+## 更新线上版本
 
-仓库根目录需要是 `index.html`。首次部署：
+已经部署在 GitHub Pages。改完 `index.html` 后：
+
+```bash
+git add -A
+git commit -m "update homepage"
+git push
+```
+
+等 20–30 秒，线上自动生效，不需要重新构建。
+
+## 首次部署（换仓库时参考）
 
 ```bash
 cd personal-site
