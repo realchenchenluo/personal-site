@@ -22,8 +22,8 @@ python -m http.server 8000
 
 | 内容 | 搜索关键词 |
 | --- | --- |
-| 姓名、英文名 | 罗晨晨 / CHENCHEN LUO / CHENCHEN |
-| 学校与自我介绍 | 北京语言大学 |
+| 姓名 | Chen Chen / CHEN CHEN |
+| 自我介绍 | `hero-intro` / `card-about` |
 | 邮箱（页面里有 3 处） | `realchenchenluo@gmail.com` |
 | 首页三行近况 | `Now` / `Learning` / `Playing` |
 | 作品列表 | `01 / Selected Work` 下面的六个 `<a class="work-row">` |
@@ -42,7 +42,7 @@ python -m http.server 8000
 
 | 编号 | 效果 | 用在哪 |
 | --- | --- | --- |
-| #083 | 光标跟随 | 全站，朱红圆环延迟跟随指针 |
+| #083 | 光标跟随 | 全站，朱红圆环跟随指针（跟随系数调至 0.3，比原参数更跟手） |
 | #084 | 磁吸按钮 | 首屏两个按钮、复制邮箱按钮 |
 | #146 | 滚动文字显现 | 「把想法做成能跑的东西」整段 |
 | #149 | 滚动隐藏页头 | 向下滚动收起，向上滚动出现 |

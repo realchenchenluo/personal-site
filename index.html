@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>罗晨晨 · 把想法做成能跑的东西</title>
-<meta name="description" content="罗晨晨的个人主页：在北京读书，写代码，也写文档。这里放着六件已经上线的小东西。">
-<meta name="author" content="罗晨晨">
-<meta property="og:title" content="罗晨晨 · 把想法做成能跑的东西">
-<meta property="og:description" content="六件已经上线的小东西，以及一个不太安分的学生。">
+<title>Chen Chen · 把想法做成能跑的东西</title>
+<meta name="description" content="Chen Chen 的个人主页：写代码，也写文档。这里放着六件已经上线的小东西。">
+<meta name="author" content="Chen Chen">
+<meta property="og:title" content="Chen Chen · 把想法做成能跑的东西">
+<meta property="og:description" content="六件已经上线的小东西，以及一个还在折腾的人。">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2317160f'/%3E%3Ccircle cx='32' cy='32' r='15' fill='%23c4472d'/%3E%3C/svg%3E">
   <script>
@@ -128,10 +128,6 @@
     animation: pulse 2.6s infinite;
   }
   .brand-en { letter-spacing: .16em; }
-  .brand-cn {
-    padding-left: 10px; border-left: 1px solid var(--line);
-    font-family: var(--sans); font-size: 12px; letter-spacing: .22em; color: var(--soft);
-  }
   .head-nav { display: flex; align-items: center; gap: 28px; }
   .head-nav a {
     position: relative; font-size: 13px; color: var(--soft);
@@ -212,17 +208,17 @@
     font-family: var(--serif); font-style: italic;
     font-size: clamp(17px, 1.6vw, 21px);
     color: var(--soft); letter-spacing: .01em;
-    opacity: 0; animation: fade 1s ease 1.05s forwards;
+    opacity: 0; animation: fade .7s ease .65s forwards;
   }
   .hero-intro {
     margin: 30px 0 0; max-width: 34em;
     font-size: 16px; line-height: 1.95; color: var(--soft);
-    opacity: 0; animation: fade 1s ease 1.15s forwards;
+    opacity: 0; animation: fade .7s ease .75s forwards;
   }
   .hero-intro strong { color: var(--ink); font-weight: 600; }
   .hero-actions {
     margin-top: 34px; display: flex; flex-wrap: wrap; gap: 12px;
-    opacity: 0; animation: fade 1s ease 1.25s forwards;
+    opacity: 0; animation: fade .7s ease .85s forwards;
   }
   .btn {
     --mx: 0px; --my: 0px;
@@ -243,7 +239,7 @@
     display: flex; flex-wrap: wrap; gap: 12px 40px;
     margin-top: 38px; padding-top: 20px;
     border-top: 1px solid var(--line);
-    opacity: 0; animation: fade 1s ease 1.35s forwards;
+    opacity: 0; animation: fade .7s ease .9s forwards;
   }
   .fact { display: flex; gap: 10px; align-items: baseline; font-size: 12.5px; }
   .fact b {
@@ -255,7 +251,7 @@
   /* portrait */
   .hero-figure {
     position: relative; justify-self: end; width: 100%; max-width: 400px;
-    opacity: 0; animation: fade 1.2s ease .5s forwards;
+    opacity: 0; animation: fade 1s ease .35s forwards;
   }
   .portrait-stage { width: 100%; perspective: 900px; }
   .portrait {
@@ -538,6 +534,18 @@
   .statement-text .line { display: block; }
   .statement-text .line.accent { color: var(--accent); }
   .statement-text .ch { opacity: .16; }
+  .statement-quote {
+    margin: 42px 0 0;
+    padding-left: 20px;
+    border-left: 2px solid var(--accent);
+    max-width: 30em;
+    font-family: var(--serif);
+    font-size: clamp(17px, 1.7vw, 21px);
+    line-height: 1.85;
+    color: var(--soft);
+    text-wrap: pretty;
+  }
+  .statement-quote .accent { color: var(--accent); }
   .statement-sign {
     margin: 32px 0 0;
     font-family: var(--mono); font-size: 10px; letter-spacing: .16em;
@@ -697,8 +705,6 @@
   }
   @media (max-width: 560px) {
     .wrap, .head-inner { width: calc(100% - 36px); }
-    .brand-en { display: none; }
-    .brand-cn { display: inline; padding-left: 0; border-left: 0; letter-spacing: .18em; }
     .head-nav { gap: 16px; }
     .head-nav a { font-size: 12px; }
     .hero { padding-top: 104px; padding-bottom: 40px; }
@@ -738,8 +744,7 @@
   <div class="head-inner">
     <a class="brand" href="#top" aria-label="回到首页">
       <span class="brand-dot" aria-hidden="true"></span>
-      <span class="brand-en">CHENCHEN LUO</span>
-      <span class="brand-cn">罗晨晨</span>
+      <span class="brand-en">CHEN CHEN</span>
     </a>
     <nav class="head-nav" aria-label="主导航">
       <a href="#work">作品</a>
@@ -763,7 +768,7 @@
     <div class="wrap">
       <div class="hero-grid">
         <div class="hero-copy">
-          <p class="kicker"><span class="live-dot" aria-hidden="true"></span> Portfolio 2026 · Beijing</p>
+          <p class="kicker"><span class="live-dot" aria-hidden="true"></span> Portfolio 2026</p>
           <h1 class="hero-title" id="hero-title">
             <span class="line"><span>把想法</span></span>
             <span class="line"><span>做成<span class="mark">能跑</span></span></span>
@@ -771,7 +776,7 @@
           </h1>
           <p class="hero-en">Small things, made well.</p>
           <p class="hero-intro">
-            我是<strong>罗晨晨</strong>，北京语言大学在读。写代码，也写需求文档；喜欢把一句模糊的念头，
+            我是<strong>Chen Chen</strong>，写代码，也写需求文档；喜欢把一句模糊的念头，
             做成别人点开就能用的网页。这里放着我最近做完的小东西——都不大，但都能跑。
           </p>
           <div class="hero-actions">
@@ -779,7 +784,7 @@
             <a class="btn" href="mailto:realchenchenluo@gmail.com" data-magnetic>打个招呼 <span aria-hidden="true">↗</span></a>
           </div>
           <div class="hero-facts">
-            <p class="fact"><b>Now</b><span>做银行 AI 智能体的产品文档</span></p>
+            <p class="fact"><b>Now</b><span>做一个 AI 智能体的产品文档</span></p>
             <p class="fact"><b>Learning</b><span>动效、排版，以及把话说短</span></p>
             <p class="fact"><b>Playing</b><span>极限飞盘，还是新手</span></p>
           </div>
@@ -791,7 +796,7 @@
               <defs>
                 <path id="stampPath" d="M54,54 m-39,0 a39,39 0 1,1 78,0 a39,39 0 1,1 -78,0"/>
               </defs>
-              <text><textPath href="#stampPath">OPEN TO SMALL IDEAS · BEIJING · 2026 · </textPath></text>
+              <text><textPath href="#stampPath">OPEN TO SMALL IDEAS · CHEN CHEN · </textPath></text>
             </svg>
             <span class="stamp-star">✳</span>
           </div>
@@ -817,8 +822,8 @@
                     <path d="M92 122h16M92 122v16M308 122h-16M308 122v16" stroke="currentColor" stroke-width="1" opacity=".55"/>
                     <text x="34" y="52" font-family="monospace" font-size="10" letter-spacing="2" fill="currentColor" opacity=".6">FIG. 01</text>
                     <text x="34" y="70" font-family="monospace" font-size="8" letter-spacing="1.6" fill="currentColor" opacity=".4">A PERSON, ABSTRACTED</text>
-                    <text x="34" y="316" font-family="monospace" font-size="8" letter-spacing="1.6" fill="currentColor" opacity=".55">39.99 N · 116.31 E</text>
-                    <text x="366" y="316" font-family="monospace" font-size="8" letter-spacing="1.6" fill="currentColor" opacity=".55" text-anchor="end">BEIJING</text>
+                    <text x="34" y="316" font-family="monospace" font-size="8" letter-spacing="1.6" fill="currentColor" opacity=".55">SELF, ABSTRACTED</text>
+                    <text x="366" y="316" font-family="monospace" font-size="8" letter-spacing="1.6" fill="currentColor" opacity=".55" text-anchor="end">CHEN CHEN</text>
                   </g>
                 </svg>
                 <span class="portrait-glare" aria-hidden="true"></span>
@@ -846,14 +851,14 @@
         <span>Small things, made well</span><i>✳</i>
         <span>AI · Web · Product</span><i>✳</i>
         <span>先做出来，再做好看</span><i>✳</i>
-        <span>Based in Beijing</span><i>✳</i>
+        <span>Always in progress</span><i>✳</i>
         <span>Open to small ideas</span><i>✳</i>
       </div>
       <div class="ticker-group">
         <span>Small things, made well</span><i>✳</i>
         <span>AI · Web · Product</span><i>✳</i>
         <span>先做出来，再做好看</span><i>✳</i>
-        <span>Based in Beijing</span><i>✳</i>
+        <span>Always in progress</span><i>✳</i>
         <span>Open to small ideas</span><i>✳</i>
       </div>
     </div>
@@ -928,6 +933,7 @@
           <span class="line">能跑的东西，</span>
           <span class="line accent">再让它好看。</span>
         </p>
+        <p class="statement-quote reveal"><span class="accent">“</span>如果结局不能让你满意，那就还不是结局。<span class="accent">”</span></p>
         <p class="statement-sign">写给自己 · 2026 · 还在改</p>
       </div>
     </div>
@@ -938,7 +944,7 @@
       <div class="section-head reveal">
         <span class="section-index">02 / About</span>
         <h2 class="section-title" id="about-title">关于我，以及此刻</h2>
-        <p class="section-note">一个不太安分的学生。<br>喜欢把东西做完，而不只是开始。</p>
+        <p class="section-note">一个还在折腾的人。<br>喜欢把东西做完，而不只是开始。</p>
       </div>
 
       <div class="bento">
@@ -950,8 +956,7 @@
             写网页是这样，写文档、做比赛、玩飞盘也是这样。
           </p>
           <p>
-            现在在北京语言大学读书，课上学的和课下折腾的常常不是一回事。白天写代码和需求文档，
-            晚上做点奇怪的小工具——它们大多没什么用，但都挺好玩。
+            白天写代码和需求文档，晚上做点奇怪的小工具——它们大多没什么用，但都挺好玩。
           </p>
           <div class="stats">
             <div class="stat"><b>06</b><span>上线的小项目</span></div>
@@ -964,10 +969,10 @@
           <span class="card-label">Now / 此刻</span>
           <div class="clock-row">
             <span class="clock" id="clock">--:--:--</span>
-            <span class="clock-zone">CST</span>
+            <span class="clock-zone">UTC</span>
           </div>
           <div class="now-rows">
-            <div class="now-row"><span>在做</span><b>银行 AI 智能体的产品文档</b></div>
+            <div class="now-row"><span>在做</span><b>一个 AI 智能体的产品文档</b></div>
             <div class="now-row"><span>在学</span><b>动效、排版，以及把话说短</b></div>
             <div class="now-row"><span>在玩</span><b>极限飞盘，目前还是新手</b></div>
             <div class="now-row"><span>相信</span><b>能用，比完备更重要</b></div>
@@ -1022,7 +1027,7 @@
         <a href="https://showheyohtaki.github.io/motion-prompt/" target="_blank" rel="noopener">Motion Prompt ↗</a>
       </div>
       <div class="contact-foot">
-        <span>© <span id="year">2026</span> 罗晨晨</span>
+        <span>© <span id="year">2026</span> Chen Chen</span>
         <span>手工写就 · 无模板 · 无追踪</span>
         <a href="#top">回到顶部 ↑</a>
       </div>
@@ -1047,10 +1052,10 @@
     try { localStorage.setItem("theme", next); } catch (e) {}
   });
 
-  /* ---- clock (Beijing) ---- */
+  /* ---- clock (UTC) ---- */
   var clock = document.getElementById("clock");
   var timeFmt = new Intl.DateTimeFormat("zh-CN", {
-    timeZone: "Asia/Shanghai", hour12: false,
+    timeZone: "UTC", hour12: false,
     hour: "2-digit", minute: "2-digit", second: "2-digit"
   });
   function tick() { clock.textContent = timeFmt.format(new Date()); }
@@ -1204,7 +1209,7 @@
     function cursorLoop(now) {
       var dt = Math.min(48, now - (cursorLast || now));
       cursorLast = now;
-      var k = 1 - Math.pow(1 - 0.12, dt / 16.67);
+      var k = 1 - Math.pow(1 - 0.3, dt / 16.67);
       fx += (px - fx) * k;
       fy += (py - fy) * k;
       cursor.style.transform = "translate3d(" + fx.toFixed(2) + "px," + fy.toFixed(2) + "px,0)";
