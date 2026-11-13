@@ -756,9 +756,6 @@
     color: #4c5a52; text-transform: uppercase;
   }
 
-  .project-grid {
-    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px;
-  }
   .project-card {
     position: relative; display: flex; flex-direction: column;
     border: 1px solid var(--line); background: var(--card);
@@ -875,6 +872,116 @@
     color: var(--paper); opacity: .45; text-transform: uppercase;
   }
 
+  /* ---------- horizontal work rail ---------- */
+  .work-rail {
+    position: relative;
+    width: 100vw; margin-left: calc(50% - 50vw);
+    height: 250vh;
+    margin-top: 6px;
+  }
+  .work-rail-sticky {
+    position: sticky; top: 64px;
+    height: calc(100vh - 64px);
+    display: flex; flex-direction: column; justify-content: center;
+    overflow: hidden;
+  }
+  .work-rail-sticky::before,
+  .work-rail-sticky::after {
+    content: ""; position: absolute; top: 0; bottom: 0; z-index: 3;
+    width: max(24px, 5vw); pointer-events: none;
+  }
+  .work-rail-sticky::before {
+    left: 0;
+    background: linear-gradient(to right, var(--paper), transparent);
+  }
+  .work-rail-sticky::after {
+    right: 0;
+    background: linear-gradient(to left, var(--paper), transparent);
+  }
+  .work-rail-head {
+    width: min(1240px, calc(100% - 96px));
+    margin: 0 auto 20px;
+    display: flex; justify-content: space-between; align-items: baseline; gap: 20px;
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: .14em;
+    color: var(--soft); text-transform: uppercase;
+  }
+  .work-rail-meta { display: flex; align-items: baseline; gap: 10px; }
+  .work-rail-meta b { color: var(--accent); font-weight: 400; }
+  .work-track {
+    display: flex; gap: 24px; width: max-content;
+    padding: 0 max(48px, calc((100vw - 1240px) / 2));
+    will-change: transform;
+  }
+  .work-track .project-card {
+    flex: 0 0 clamp(360px, 34vw, 500px);
+    min-height: 480px;
+  }
+  .work-rail-progress {
+    width: min(1240px, calc(100% - 96px));
+    height: 1px; margin: 24px auto 0;
+    background: var(--line); overflow: hidden;
+  }
+  .work-rail-progress i {
+    display: block; width: 100%; height: 100%;
+    background: var(--accent);
+    transform: scaleX(0); transform-origin: left;
+  }
+
+  /* ---------- section title mask ---------- */
+  .section-title { overflow: hidden; }
+  .section-title > span {
+    display: block;
+    transform: translateY(110%);
+    transition: transform .9s var(--ease);
+  }
+  .section-head.in .section-title > span { transform: translateY(0); }
+
+  /* ---------- spotlight hover ---------- */
+  .feature-card, .experiment-card { position: relative; }
+  .project-card::after,
+  .feature-card::after,
+  .exp-text::after {
+    content: ""; position: absolute; inset: 0; z-index: 0;
+    pointer-events: none; opacity: 0; transition: opacity .35s;
+  }
+  .project-card::after {
+    background: radial-gradient(280px circle at var(--sx, 50%) var(--sy, 50%), rgba(196, 71, 45, .16), transparent 65%);
+  }
+  .feature-card::after,
+  .exp-text::after {
+    background: radial-gradient(260px circle at var(--sx, 50%) var(--sy, 50%), rgba(255, 255, 255, .18), transparent 65%);
+  }
+  .project-card:hover::after,
+  .feature-card:hover::after,
+  .exp-text:hover::after { opacity: 1; }
+  .project-media, .project-body,
+  .feature-copy, .feature-media,
+  .exp-cover, .exp-text .experiment-body { position: relative; z-index: 1; }
+
+  /* ---------- image mask reveal ---------- */
+  .project-card .project-media img,
+  .feature-card .feature-media img {
+    clip-path: inset(0 100% 0 0);
+    transition: transform .65s var(--ease), clip-path 1s var(--ease);
+  }
+  .project-card.in .project-media img,
+  .feature-card.in .feature-media img { clip-path: inset(0 0 0 0); }
+
+  /* no-JS fallbacks */
+  html:not(.js) .section-title > span { transform: none; }
+  html:not(.js) .project-card .project-media img,
+  html:not(.js) .feature-card .feature-media img { clip-path: none; }
+  html:not(.js) .work-rail { width: auto; margin-left: 0; height: auto; }
+  html:not(.js) .work-rail-sticky { position: static; height: auto; overflow: visible; }
+  html:not(.js) .work-rail-sticky::before,
+  html:not(.js) .work-rail-sticky::after { display: none; }
+  html:not(.js) .work-rail-head,
+  html:not(.js) .work-rail-progress { display: none; }
+  html:not(.js) .work-track {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px; width: auto; padding: 0; transform: none;
+  }
+
   /* ---------- responsive ---------- */
   @media (max-width: 1080px) {
     .section-head { grid-template-columns: 132px minmax(0, 1fr) 240px; }
@@ -926,12 +1033,18 @@
       border-top: 0; border-bottom: 1px solid var(--line);
     }
     .about-bento .principles li:last-child { border-bottom: 0; }
+    .work-rail { width: auto; margin-left: 0; height: auto; }
+    .work-rail-sticky { position: static; height: auto; overflow: visible; }
+    .work-rail-sticky::before, .work-rail-sticky::after { display: none; }
+    .work-rail-head, .work-rail-progress { display: none; }
+    .work-track {
+      display: grid; grid-template-columns: 1fr; gap: 24px;
+      width: auto; padding: 0; transform: none !important;
+    }
+    .work-track .project-card { width: auto; min-height: 0; }
   }
   @media (max-width: 860px) {
     .experiments-grid { grid-template-columns: 1fr; }
-  }
-  @media (max-width: 700px) {
-    .project-grid { grid-template-columns: 1fr; }
   }
   @media (max-width: 560px) {
     .intro-lead { font-size: 22px; }
@@ -957,6 +1070,19 @@
     .cursor, .scroll-cue { display: none; }
     .statement-text .ch { opacity: 1 !important; }
     .portrait { transform: none !important; }
+    .section-title > span { transform: none !important; }
+    .project-card .project-media img,
+    .feature-card .feature-media img { clip-path: none !important; }
+    .project-card::after, .feature-card::after, .exp-text::after { display: none; }
+    .work-rail { width: auto; margin-left: 0; height: auto; }
+    .work-rail-sticky { position: static; height: auto; overflow: visible; }
+    .work-rail-sticky::before, .work-rail-sticky::after { display: none; }
+    .work-rail-head, .work-rail-progress { display: none; }
+    .work-track {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;
+      width: auto; padding: 0; transform: none !important;
+    }
+    .work-track .project-card { width: auto; min-height: 0; }
   }
 </style>
 </head>
@@ -1092,7 +1218,7 @@
     <div class="wrap">
       <div class="section-head reveal">
         <span class="section-index">01 / About</span>
-        <h2 class="section-title" id="about-title">在北京读书，学人工智能</h2>
+        <h2 class="section-title" id="about-title"><span>在北京读书，学人工智能</span></h2>
         <p class="section-note">一半时间写代码，<br>一半时间把想法做出来。</p>
       </div>
 
@@ -1169,7 +1295,7 @@
     <div class="wrap">
       <div class="section-head reveal">
         <span class="section-index">02 / Selected Work</span>
-        <h2 class="section-title" id="work-title">做过的东西</h2>
+        <h2 class="section-title" id="work-title"><span>做过的东西</span></h2>
         <p class="section-note">能点开的都上线了。<br>没链接的，是内部项目或还在长的。</p>
       </div>
 
@@ -1198,10 +1324,16 @@
         </div>
       </article>
 
-      <div class="project-grid">
+      <div class="work-rail" data-horizontal>
+        <div class="work-rail-sticky">
+          <div class="work-rail-head">
+            <span>Selected projects / 01–06</span>
+            <span class="work-rail-meta"><b class="work-rail-count">01</b> / 06 · Scroll to explore →</span>
+          </div>
+          <div class="work-track">
         <a class="project-card reveal" href="https://realchenchenluo.github.io/cisheng/" target="_blank" rel="noopener">
           <figure class="project-media">
-            <img src="assets/cisheng.webp" alt="词声的语音默写首页" width="1200" height="750" loading="lazy">
+            <img src="assets/cisheng.webp" alt="词声的语音默写首页" width="1200" height="750">
           </figure>
           <div class="project-body">
             <div class="project-top"><span>01</span><span>Web · 2026</span></div>
@@ -1214,7 +1346,7 @@
 
         <a class="project-card reveal" href="https://realchenchenluo.github.io/concept-fable/" target="_blank" rel="noopener">
           <figure class="project-media">
-            <img src="assets/concept-fable.webp" alt="概念寓言机的故事首页" width="1200" height="750" loading="lazy">
+            <img src="assets/concept-fable.webp" alt="概念寓言机的故事首页" width="1200" height="750">
           </figure>
           <div class="project-body">
             <div class="project-top"><span>02</span><span>Web · 2026</span></div>
@@ -1227,7 +1359,7 @@
 
         <a class="project-card reveal" href="https://realchenchenluo.github.io/frisbee-radar/" target="_blank" rel="noopener">
           <figure class="project-media">
-            <img src="assets/frisbee.webp" alt="飞盘讯息聚合页面" width="1200" height="750" loading="lazy">
+            <img src="assets/frisbee.webp" alt="飞盘讯息聚合页面" width="1200" height="750">
           </figure>
           <div class="project-body">
             <div class="project-top"><span>03</span><span>Web · 2026</span></div>
@@ -1240,7 +1372,7 @@
 
         <a class="project-card reveal" href="https://realchenchenluo.github.io/chishenme/" target="_blank" rel="noopener">
           <figure class="project-media">
-            <img src="assets/chishenme.webp" alt="今天吃什么抽签界面" width="1200" height="750" loading="lazy">
+            <img src="assets/chishenme.webp" alt="今天吃什么抽签界面" width="1200" height="750">
           </figure>
           <div class="project-body">
             <div class="project-top"><span>04</span><span>Web · 2026</span></div>
@@ -1253,7 +1385,7 @@
 
         <a class="project-card reveal" href="https://realchenchenluo.github.io/weather/" target="_blank" rel="noopener">
           <figure class="project-media">
-            <img src="assets/wearcast.webp" alt="Wearcast 今天穿什么页面" width="1200" height="750" loading="lazy">
+            <img src="assets/wearcast.webp" alt="Wearcast 今天穿什么页面" width="1200" height="750">
           </figure>
           <div class="project-body">
             <div class="project-top"><span>05</span><span>Web · 2026</span></div>
@@ -1266,7 +1398,7 @@
 
         <article class="project-card no-link reveal">
           <figure class="project-media">
-            <img src="assets/token.webp" alt="Token 用量看板的数据面板" width="1200" height="750" loading="lazy">
+            <img src="assets/token.webp" alt="Token 用量看板的数据面板" width="1200" height="750">
           </figure>
           <div class="project-body">
             <div class="project-top"><span>06</span><span>Local tool · 2026</span></div>
@@ -1275,6 +1407,9 @@
             <div class="project-tags"><span>Flask</span><span>数据</span><span>本地</span></div>
           </div>
         </article>
+          </div>
+          <div class="work-rail-progress" aria-hidden="true"><i></i></div>
+        </div>
       </div>
     </div>
   </section>
@@ -1283,7 +1418,7 @@
     <div class="wrap">
       <div class="section-head reveal">
         <span class="section-index">03 / More</span>
-        <h2 class="section-title" id="experiments-title">边角料与实验</h2>
+        <h2 class="section-title" id="experiments-title"><span>边角料与实验</span></h2>
         <p class="section-note">没做成大众产品的、偏实验的，<br>也值得留个位置。</p>
       </div>
 
@@ -1430,6 +1565,11 @@
   } else {
     items.forEach(function (el) { el.classList.add("in"); });
   }
+  function revealSweep() {
+    [].forEach.call(items, function (el) {
+      if (el.getBoundingClientRect().top < 0) el.classList.add("in");
+    });
+  }
 
   /* ---- shared motion helpers ---- */
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -1523,6 +1663,7 @@
 
   var uiTick = false;
   function updateScrollUI() {
+    revealSweep();
     updateHeader();
     updateSpy();
     updateStatement();
@@ -1535,6 +1676,55 @@
   }, { passive: true });
   window.addEventListener("resize", updateScrollUI);
   updateScrollUI();
+
+  /* ---- horizontal work rail (#077) ---- */
+  var rail = document.querySelector("[data-horizontal]");
+  if (rail) {
+    var railTrack = rail.querySelector(".work-track");
+    var railSticky = rail.querySelector(".work-rail-sticky");
+    var railFill = rail.querySelector(".work-rail-progress i");
+    var railCount = rail.querySelector(".work-rail-count");
+    var railMq = window.matchMedia("(min-width: 901px)");
+    var railTick = false;
+
+    function updateRail() {
+      if (!railMq.matches || reduceMotion) {
+        railTrack.style.transform = "";
+        if (railFill) railFill.style.transform = "scaleX(0)";
+        if (railCount) railCount.textContent = "01";
+        return;
+      }
+      var rect = rail.getBoundingClientRect();
+      var span = rail.offsetHeight - window.innerHeight + 64;
+      var p = clamp01(span > 0 ? (64 - rect.top) / span : 0);
+      var maxX = Math.max(0, railTrack.scrollWidth - railSticky.clientWidth);
+      railTrack.style.transform = "translate3d(" + (-p * maxX).toFixed(2) + "px,0,0)";
+      if (railFill) railFill.style.transform = "scaleX(" + p + ")";
+      if (railCount) {
+        var idx = Math.min(6, Math.floor(p * 6) + 1);
+        railCount.textContent = (idx < 10 ? "0" : "") + idx;
+      }
+    }
+
+    window.addEventListener("scroll", function () {
+      if (!railTick) {
+        railTick = true;
+        requestAnimationFrame(function () { updateRail(); railTick = false; });
+      }
+    }, { passive: true });
+    window.addEventListener("resize", updateRail);
+    updateRail();
+  }
+
+  /* ---- spotlight hover (#154) ---- */
+  var spotCards = document.querySelectorAll(".project-card, .feature-card, .exp-text");
+  [].forEach.call(spotCards, function (el) {
+    el.addEventListener("pointermove", function (e) {
+      var r = el.getBoundingClientRect();
+      el.style.setProperty("--sx", ((e.clientX - r.left) / r.width * 100).toFixed(2) + "%");
+      el.style.setProperty("--sy", ((e.clientY - r.top) / r.height * 100).toFixed(2) + "%");
+    });
+  });
 
   /* ---- cursor follower (#083) ---- */
   if (finePointer && !reduceMotion) {
