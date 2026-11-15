@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="light">
+<html lang="zh-CN" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0807">
 <title>Chen Chen · 把想法做成能跑的东西</title>
 <meta name="description" content="Chen Chen 的个人主页：在北京读人工智能专业，写代码，也做点小东西。">
 <meta name="author" content="Chen Chen">
@@ -11,14 +12,8 @@
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2317160f'/%3E%3Ccircle cx='32' cy='32' r='15' fill='%23c4472d'/%3E%3C/svg%3E">
   <script>
-  (function () {
-    document.documentElement.classList.add('js');
-    try {
-      var t = localStorage.getItem('theme');
-      if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', t);
-    } catch (e) {}
-  })();
+  document.documentElement.classList.add('js');
+  document.documentElement.setAttribute('data-theme', 'dark');
 </script>
 <style>
   :root {
@@ -1085,9 +1080,22 @@
     .work-track .project-card { width: auto; min-height: 0; }
   }
 </style>
+  <link rel="stylesheet" href="signal.css">
 </head>
 <body id="top">
 <a class="skip" href="#main">跳到正文</a>
+<div class="preloader" id="preloader" aria-hidden="true">
+  <div class="preloader-inner">
+    <div class="preloader-top">
+      <div>
+        <span class="preloader-brand">CHEN CHEN</span>
+        <span class="preloader-meta">Portfolio 2026 / Signal</span>
+      </div>
+      <span class="preloader-count" id="preloaderCount">00</span>
+    </div>
+    <div class="preloader-track"><i id="preloaderBar"></i></div>
+  </div>
+</div>
 <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
 
 <header class="site-head">
@@ -1097,9 +1105,9 @@
       <span class="brand-en">CHEN CHEN</span>
     </a>
     <nav class="head-nav" aria-label="主导航">
-      <a href="#about">关于</a>
-      <a href="#work">作品</a>
-      <a href="#contact">联系</a>
+      <a href="#about" class="nav-roll"><span>关于</span><span aria-hidden="true">关于</span></a>
+      <a href="#work" class="nav-roll"><span>作品</span><span aria-hidden="true">作品</span></a>
+      <a href="#contact" class="nav-roll"><span>联系</span><span aria-hidden="true">联系</span></a>
       <button class="theme-btn" id="themeBtn" type="button" aria-label="切换深浅配色">
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
           <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/>
@@ -1115,10 +1123,11 @@
 
 <main id="main">
   <section class="hero" aria-labelledby="hero-title">
+    <canvas id="heroCanvas" class="hero-canvas" aria-hidden="true"></canvas>
     <div class="wrap">
       <div class="hero-grid">
         <div class="hero-copy">
-          <p class="kicker"><span class="live-dot" aria-hidden="true"></span> Portfolio 2026</p>
+          <p class="kicker"><span class="live-dot" aria-hidden="true"></span> Portfolio 2026 / Signal</p>
           <h1 class="hero-title" id="hero-title">
             <span class="line"><span>把想法</span></span>
             <span class="line"><span>做成<span class="mark">能跑</span></span></span>
@@ -1126,7 +1135,7 @@
           </h1>
           <p class="hero-en">Small things, made well.</p>
           <p class="hero-intro">
-            我是<strong>Chen Chen</strong>，在北京读书，人工智能专业。写代码，也写需求文档；
+            我是<strong>Chen Chen</strong>，在北京读书，<span class="nw">人工智能专业</span>。写代码，也写需求文档；
             喜欢把一句模糊的念头，做成别人点开就能用的网页。
           </p>
           <div class="hero-actions">
@@ -1187,7 +1196,7 @@
           <p class="figure-note">FIG. 01 — ONE OF MANY VERSIONS</p>
         </div>
       </div>
-      <div class="hero-watermark" aria-hidden="true">LUO</div>
+      <div class="hero-watermark" aria-hidden="true">CHEN</div>
     </div>
     <div class="scroll-cue" aria-hidden="true">
       <span class="cue-word">Scroll</span>
@@ -1214,7 +1223,7 @@
     </div>
   </div>
 
-  <section class="section" id="about" aria-labelledby="about-title">
+  <section class="section section-light" id="about" aria-labelledby="about-title">
     <div class="wrap">
       <div class="section-head reveal">
         <span class="section-index">01 / About</span>
@@ -1224,7 +1233,7 @@
 
       <div class="intro-grid">
         <div class="intro-copy reveal">
-          <p class="intro-lead">我是 Chen Chen，<br>本科在读，人工智能专业。</p>
+          <p class="intro-lead">我是 Chen Chen，<br>本科在读，<span class="nw">人工智能专业</span>。</p>
           <p>
             平时写代码，也写产品文档。喜欢把一个模糊的念头，做成别人点开就能用的东西——网页、小程序，
             或者一个能陪人聊两句的 Agent。
@@ -1291,7 +1300,7 @@
     </div>
   </section>
 
-  <section class="section" id="work" aria-labelledby="work-title">
+  <section class="section section-light" id="work" aria-labelledby="work-title">
     <div class="wrap">
       <div class="section-head reveal">
         <span class="section-index">02 / Selected Work</span>
@@ -1414,7 +1423,7 @@
     </div>
   </section>
 
-  <section class="section" id="experiments" aria-labelledby="experiments-title">
+  <section class="section section-light" id="experiments" aria-labelledby="experiments-title">
     <div class="wrap">
       <div class="section-head reveal">
         <span class="section-index">03 / More</span>
@@ -1493,6 +1502,7 @@
         <button class="copy-btn" id="copyEmail" type="button" data-magnetic>复制邮箱</button>
       </div>
       <div class="contact-links reveal">
+        <a href="classic/index.html">Classic version ↗</a>
         <a href="https://github.com/realchenchenluo" target="_blank" rel="noopener">GitHub ↗</a>
         <a href="https://realchenchenluo.github.io/concept-fable/" target="_blank" rel="noopener">Concept Fable ↗</a>
         <a href="https://showheyohtaki.github.io/motion-prompt/" target="_blank" rel="noopener">Motion Prompt ↗</a>
@@ -1507,7 +1517,7 @@
   </section>
 </main>
 
-<div class="cursor" id="cursor" aria-hidden="true"></div>
+<div class="cursor" id="cursor" aria-hidden="true"><span class="cursor-label" id="cursorLabel"></span></div>
 <div class="toast" id="toast" role="status" aria-live="polite">邮箱已复制</div>
 
 <script>
@@ -1904,5 +1914,186 @@
   });
 })();
 </script>
+<script>
+(function () {
+  "use strict";
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- preloader ---------- */
+  var pre = document.getElementById("preloader");
+  if (pre) {
+    var seen = false;
+    try { seen = sessionStorage.getItem("cc-preloader") === "1"; } catch (e) {}
+    if (reduce || seen) {
+      pre.remove();
+    } else {
+      document.documentElement.style.overflow = "hidden";
+      var count = document.getElementById("preloaderCount");
+      var bar = document.getElementById("preloaderBar");
+      var start = performance.now(), dur = 1150, finished = false;
+
+      function finish() {
+        if (finished) return;
+        finished = true;
+        try { sessionStorage.setItem("cc-preloader", "1"); } catch (e) {}
+        pre.classList.add("done");
+        document.documentElement.style.overflow = "";
+        setTimeout(function () { if (pre.parentNode) pre.remove(); }, 1000);
+      }
+
+      function tick(now) {
+        var p = Math.min(1, (now - start) / dur);
+        var v = Math.round(p * 100);
+        count.textContent = v < 10 ? "0" + v : "" + v;
+        bar.style.transform = "scaleX(" + p + ")";
+        if (p < 1) requestAnimationFrame(tick);
+        else setTimeout(finish, 160);
+      }
+
+      requestAnimationFrame(tick);
+      setTimeout(finish, 3200);
+    }
+  }
+
+  /* ---------- hero flow-field canvas ---------- */
+  var canvas = document.getElementById("heroCanvas");
+  if (canvas && !reduce) {
+    var hero = canvas.parentElement;
+    var ctx = canvas.getContext("2d");
+    var W = 0, H = 0, DPR = 1, parts = [];
+    var pointer = { x: -9999, y: -9999, on: false };
+    var raf = null, running = false, last = 0;
+
+    function init() {
+      var n = Math.max(90, Math.min(700, Math.round(W * H / 2200)));
+      parts = [];
+      for (var i = 0; i < n; i++) {
+        parts.push({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          vx: (Math.random() - .5) * .35,
+          vy: (Math.random() - .5) * .35,
+          r: Math.random() * 1.5 + .35,
+          a: Math.random() * .4 + .12,
+          c: Math.random() < .62 ? "255,75,43" : "242,236,225"
+        });
+      }
+    }
+
+    function resize() {
+      DPR = Math.min(1.5, window.devicePixelRatio || 1);
+      W = hero.clientWidth;
+      H = hero.clientHeight;
+      canvas.width = Math.round(W * DPR);
+      canvas.height = Math.round(H * DPR);
+      canvas.style.width = W + "px";
+      canvas.style.height = H + "px";
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      init();
+    }
+
+    function frame(now) {
+      if (!running) { raf = null; return; }
+      var dt = Math.min(32, now - (last || now));
+      last = now;
+      var t = now * .00012;
+      ctx.clearRect(0, 0, W, H);
+      for (var i = 0; i < parts.length; i++) {
+        var p = parts[i];
+        var ang = Math.sin(p.x * .003 + t * 2.1) * 2.2 + Math.cos(p.y * .0024 - t * 1.7) * 1.8;
+        p.vx += Math.cos(ang) * .006;
+        p.vy += Math.sin(ang) * .006;
+        if (pointer.on) {
+          var dx = p.x - pointer.x, dy = p.y - pointer.y;
+          var d2 = dx * dx + dy * dy;
+          if (d2 < 18000 && d2 > 1) {
+            var f = (1 - d2 / 18000) * .10 / Math.sqrt(d2);
+            p.vx += dx * f;
+            p.vy += dy * f;
+          }
+        }
+        p.vx *= .986;
+        p.vy *= .986;
+        p.x += p.vx * dt / 16.7;
+        p.y += p.vy * dt / 16.7;
+        if (p.x < -8) p.x = W + 8; else if (p.x > W + 8) p.x = -8;
+        if (p.y < -8) p.y = H + 8; else if (p.y > H + 8) p.y = -8;
+        ctx.fillStyle = "rgba(" + p.c + "," + p.a + ")";
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, 6.2832);
+        ctx.fill();
+      }
+      raf = requestAnimationFrame(frame);
+    }
+
+    function play() {
+      if (!running) {
+        running = true;
+        last = 0;
+        raf = requestAnimationFrame(frame);
+      }
+    }
+
+    function pause() {
+      running = false;
+      if (raf) { cancelAnimationFrame(raf); raf = null; }
+    }
+
+    hero.addEventListener("pointermove", function (e) {
+      var r = hero.getBoundingClientRect();
+      pointer.x = e.clientX - r.left;
+      pointer.y = e.clientY - r.top;
+      pointer.on = true;
+    }, { passive: true });
+    hero.addEventListener("pointerleave", function () { pointer.on = false; });
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) pause(); else play();
+    });
+    window.addEventListener("resize", resize);
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) play(); else pause();
+        });
+      }, { threshold: 0 }).observe(hero);
+    } else {
+      play();
+    }
+    resize();
+    play();
+  }
+
+  /* ---------- cursor context label ---------- */
+  var cursorEl = document.getElementById("cursor");
+  var cursorLabel = document.getElementById("cursorLabel");
+  if (cursorEl && cursorLabel) {
+    function labelFor(t) {
+      if (!t || !t.closest) return "";
+      if (t.closest("#copyEmail")) return "COPY";
+      if (t.closest(".feature-card")) return "OPEN";
+      if (t.closest(".project-card")) return "VIEW";
+      if (t.closest("a, button")) return "OPEN";
+      return "";
+    }
+    document.addEventListener("pointerover", function (e) {
+      var l = labelFor(e.target);
+      if (l) {
+        cursorEl.classList.add("label");
+        cursorLabel.textContent = l;
+      } else {
+        cursorEl.classList.remove("label");
+        cursorLabel.textContent = "";
+      }
+    });
+    document.addEventListener("pointerout", function (e) {
+      if (!labelFor(e.relatedTarget)) {
+        cursorEl.classList.remove("label");
+        cursorLabel.textContent = "";
+      }
+    });
+  }
+})();
+</script>
+
 </body>
 </html>
